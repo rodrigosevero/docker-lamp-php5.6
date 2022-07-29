@@ -1,0 +1,198 @@
+<?php
+def("DOMPDF_ENABLE_REMOTE", false);
+
+ini_set('display_errors', 0);
+ini_set('log_errors', 0);
+error_reporting(E_ALL); 
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>RELATÓRIO MENSAL DE ATIVIDADES</title>
+	<style type="text/css">
+		body {
+			margin:0;
+			padding:0;
+			background:#FFFFFF;
+			text-align:center; /* hack para o IE */	
+			}
+		#tudo {
+			: 760px;
+			margin:0 auto;			
+			text-align:left; /* "remÃ©dio" para o hack do IE */	
+			}
+		#conteudo {
+			padding: 5px;
+			background-color: #FFF;
+			}
+		@media print { 
+		    .notprint { visibility:hidden; } 
+		}
+	</style>
+</head>
+
+<body>
+<div id="tudo">
+	<div id="conteudo">
+<div style="background:#FFF; padding-left:10px; ">
+	<table border="1" cellspacing="0" cellpadding="0" ="100%">
+    <tbody>
+        <tr>
+            <td colspan="4">
+                <p align="center">
+                    <strong>CONVÊNIO 01/2017/TCE/UFMT<br />RELATÓRIO MENSAL DE ATIVIDADES</strong>
+                </p>
+            </td>
+            
+        </tr>
+        <tr>
+            <td ="197" style="padding-left:10px;">
+                <p>
+                    <strong>Nome: </strong>
+                </p>
+            </td>
+            <td ="440" colspan="3" style="padding-left:3px;">
+            <p><?php echo ($usuario->nome);?></p>
+            </td>
+        </tr>
+        <tr>
+            <td ="197" style="padding-left:10px;">
+                <p>
+                    <strong>Função:</strong>
+                </p>
+            </td>
+            <td ="440" colspan="3" style="padding-left:3px;">
+                <p> 
+                    <?php echo $usuario->cargo_funcao; ?>
+                </p>
+            </td>
+        </tr>
+                <tr>
+            <td ="142" style="padding-left:10px;">
+                <p >
+                   <strong> Período</strong>
+                </p>
+            </td>
+            <td ="142" colspan="3" style="padding-left:3px;">
+                <p>
+                    <strong>
+                     <?php 					 
+						 $meses = array (1 => "Janeiro", 2 => "Fevereiro", 3 => "Março", 4 => "Abril", 5 => "Maio", 6 => "Junho", 7 => "Julho", 8 => "Agosto", 9 => "Setembro", 10 => "Outubro", 11 => "Novembro", 12 => "Dezembro");
+					?>
+                     <?php echo date('d/m/Y', strtotime($atividade->data_inicial)); ?> à <?php echo date('d/m/Y', strtotime($atividade->data_final)); ?>
+                     </strong>
+                </p>
+            </td>
+        </tr>
+
+        <tr>
+            <td ="638" colspan="4" valign="top" style="padding:10px;" >               
+                  <?php foreach ($usuario_projetos_bd as $usuario_projeto){ ?>         	
+                        <div>
+                        <b><?=$usuario_projeto['descricao']; ?></b><br />
+                        
+                        <? foreach ($atividade_usuario_projeto[$usuario_projeto['projeto_id']] as $projeto_id){
+                            echo '<small>'.strip_tags($projeto_id['atividade']).'</small><br/>';
+                        } ?>
+                        </div>
+                        <br>
+                    <? } ?>
+
+                
+                <div>
+                </div>
+                <p>
+                    <strong> Descrição das atividades realizadas:</strong>                
+                    <p style="font-size:90%"><?php echo ($atividade->texto); ?></p>
+                </p>
+               
+            </td>
+        </tr>
+        <tr>
+            <td ="638" colspan="4" valign="top"  style="padding:10px;">
+                            <p align="center">
+                    Cuiabá - MT <?php echo date('d/m/Y', strtotime($atividade->data_relatorio)); ?>
+                </p>
+
+                <p style="font-size:90%">
+                Declaro que estou ciente de minhas atribuições na matriz de responsabilidade e os serviços foram prestados em conformidade as atividades definidas no convênio TCE/UFMT. 
+                    <table>
+               
+               <tr>
+                <td>
+                   &nbsp;&nbsp;&nbsp;____________________________________
+                   </td>
+                   
+                   <td>
+                   
+                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                   
+
+                   
+                   
+                   </td>
+                   <td>
+                   ____________________________________
+			</td></tr>
+               
+               
+               <tr>
+                <td>
+                   &nbsp; Colaborador: <?php echo ($usuario->nome); ?><br />
+                   &nbsp; CPF: <?php echo $usuario->cpf;?>&nbsp;&nbsp;______/_____/______
+                   </td>
+                   
+                   <td>
+                   
+                  
+                  
+                 
+
+
+                   
+                   
+                   </td>
+                   <td>Representante:<br /><?php echo ($representante->nome); ?><br /></td>
+                   
+                  </tr>
+                 </table>
+
+                </p>
+            </td>
+        </tr>
+        <!--tr>
+            <td ="638" colspan="4" valign="top"  style="padding:10px;">
+                <p>
+                    <strong> Atesto a execução do serviço: </strong>
+                    <em>(Assinatura do representante institucional do TCE)</em>
+                    <br /><br /><br />
+                    
+                                       <div align="center">
+                   ______/_____/______ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;___________________________</div>
+                   
+                         <div align="center">
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                   <?php echo $representante->nome; ?>
+                   <br /><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                   Cargo:
+                   <br /><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                   Setor:
+
+
+</div>
+                    
+                     
+                </p>
+            </td>
+        </tr-->
+    </tbody>
+</table>
+</div>
+</div></div>
+
+</body></html>

@@ -1,0 +1,200 @@
+				<!-- /section:basics/sidebar -->
+				<div class="main-content">
+	            <script language="Javascript">
+					function confirmacao(id) {
+					     var resposta = confirm("Deseja remover esse registro?");
+					 
+					     if (resposta == true) {
+					          window.location.href = "<?php echo $this->url('participante/delete-projeto-participante', array('action'=>'delete-projeto-participante', 'usuario_id' => $id, 'id' => ''));?>"+id;
+
+					     }
+					}
+				</script> 	       	      
+				<div class="main-content-inner">
+                <link href="<?php echo $this->basePath('public/css/modal.css'); ?>" rel="stylesheet">   
+                
+    
+					<!-- #section:basics/content.breadcrumbs -->
+					<div class="breadcrumbs" id="breadcrumbs">
+						<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+
+						<ul class="breadcrumb">
+							<li>
+								<i class="ace-icon fa fa-home home-icon"></i>
+								<a href="<?php echo $this->url('home', array('action'=>'index'));?>">Home</a>
+							</li>
+
+							<li class="active">Beneficiários</li>
+						</ul><!-- /.breadcrumb -->
+
+						<!-- /section:basics/content.searchbox -->
+					</div>
+
+					<!-- /section:basics/content.breadcrumbs -->
+					<div class="page-content">
+						<!-- /section:settings.box -->
+						<div class="page-header">
+							<h3>
+								Detalhe: <?php echo $participante->nome;?>
+							</h3>
+						</div><!-- /.page-header -->
+ 
+					<div id="mascara"></div>
+
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+								<div class="row">
+									<div class="col-xs-12">
+                                                                       
+										<table id="simple-table" class="table table-striped table-bordered table-hover">
+											<thead>
+												<tr>
+													<th>Projetos</th>
+<!--                                                    <th>Representante</th>-->
+                                                    <th width="5%">Opções</th>
+													
+												</tr>
+											</thead>
+
+											<tbody>
+ 												<?php foreach ($participante_projetos as $usuario_projeto){ ?>
+      
+												<tr>													
+													<td width="60%"><?php echo $projetos[$usuario_projeto['projeto_id']]; ?></td>
+                                                    <!--th width="30%">
+	                                                    <select name="representante" onchange="setRepresentante(this.value, <?php echo $usuario_projeto['id']; ?>);">
+	                                                    <option value="">selecione...</option>
+                                                    <?php foreach ($representantes as $representante_id => $representante_nome){?>
+	                                                    <option 
+														<?php /*if  ($_SESSION['permissao']!=8) { ?> disabled="disabled" <?php } */ ?>
+														<?php if ($usuario_projeto['representante_id'] == $representante_id){ ?> selected="selected" <?php } ?> value="<?php echo $representante_id; ?>"><?php echo ($representante_nome); ?>
+														</option>
+	                                                    <?php  } ?>
+	                                                    </select>
+                                                    
+                                                    </th-->
+
+													<td>
+														<div class="btn-group">   
+															<?php //if  ($_SESSION['permissao']==8) { ?>
+															<button class="btn btn-xs btn-danger" onclick="confirmacao('<?php echo $usuario_projeto['id']; ?>')">
+																<i class="ace-icon fa fa-trash-o bigger-120"></i>
+															</button>
+                                                            
+                                                            <!--a  href="<?php // echo $this->url('usuario-atividade/add', array('action'=>'add', 'projeto_id' => $usuario_projeto['projeto_id']));?>" class="btn btn-xs btn-success">
+																<i class="ace-icon fa fa-check bigger-120"></i>
+															</a>
+                                                            
+                                                             <a  href="<?php //echo $this->url('usuario-atividade/consulta', array('action'=>'consulta', 'projeto_id' => $usuario_projeto['projeto_id']));?>" class="btn btn-xs btn-success">
+																<i class="ace-icon fa fa-edit bigger-120"></i>
+															</a-->
+															<?php //} ?>
+														</div>
+
+														</div>
+													</td>
+												</tr>
+                                                <?php } ?>
+
+												
+											</tbody>
+										</table>
+								                                    
+								                                    
+                                    <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.js"></script>                                    
+								    <script type="text/javascript">
+								        /*$(document).ready(function() {
+											 $('#estado').change(function() {
+											        var area_id = $('#estado').val();		            
+										    		var ajax_url = "/tce/convenio/colaborador/get-projetos/"+area_id;
+										    		
+										    		 $.ajax({
+										 	            type: "POST",
+										 	            url: ajax_url,
+										 	            data: "area="+area_id,
+										 	            success: function(msg){ 		
+										 	                $("#projeto_id").html(msg);
+										 	        	}
+										 	     	});     	   
+										        });							        
+										});*/
+
+
+                                        window.onload = function() {
+                                            $(document).ready(function () {
+                                                $('#estado').change(function() {
+                                                    $.post( "/tce/convenio/colaborador/get-projetos/"+$('#estado').val(), { area: ""+$('#estado').val()},function(data){
+                                                        $("#projeto_id").html(data);
+                                                    } );
+
+                                                });
+                                            });
+                                        };
+
+										function setRepresentante(representante_id, usuario_projeto_id)
+										{	
+								    		var ajax_url = "/tce/convenio/usuario-projeto/set-representante/"+representante_id+"/"+usuario_projeto_id;
+								    		
+								    		 $.ajax({
+								 	            type: "GET",
+								 	            url: ajax_url,
+								 	            data: {"representante_id" : representante_id, "usuario_projeto_id" : usuario_projeto_id },
+								 	            success: function(usuario_id){ 	
+													//alert("/tce/convenio/usuario-projeto/set-representante/"+representante_id+"/"+usuario_projeto_id);
+											         //window.location.href = "<?php //echo $this->url('usuario-projeto/consulta', array('action'=>'consulta', 'usuario_id' => ''));?>"+usuario_id;									 	            
+								 	        	}
+								 	     	});    
+										}
+								   </script>
+											    
+                                         <?php //if  ($_SESSION['permissao']==8) { ?>
+                                        <form class="form-horizontal" role="form" action="<?php //echo $this->url('usuario-projeto/add', array('action'=>'add', 'id' => $usuario_id));?>" method="post">
+
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Área</label>
+			
+													<div class="col-sm-4">
+			
+			                                            <select name="area_id" class="form-control" id="estado" >
+			                                            <option></option>
+			                                            <?php foreach ($areas as $area_id => $area_descricao){ ?>		  
+			                                            <option value="<?php echo $area_id; ?>"><?php echo ($area_descricao); ?></option>
+			                                            <?php } ?>	  
+			                                            </select>
+													</div>
+												</div>
+                                    
+		                                     	<div class="form-group">
+		                                			<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Projetos</label>
+					                                <div class="col-sm-9">			                                
+						                                <div id="projeto">
+			                                				<select name="projeto_id[]" class="form-control" multiple="multiple" id="projeto_id" required></select>      
+						                                </div>
+					                                </div>
+					                        	</div>   
+                                    
+			                                      <div class="form-group">
+													<div class="clearfix form-actions">
+														<div class="col-md-offset-3 col-md-9">
+															<button class="btn btn-info" type="submit">
+																<i class="ace-icon fa fa-check bigger-110"></i>
+																Salvar
+															</button>
+														</div>
+													</div>
+												</div><!-- /.col -->												
+                        					</form>
+						</div><!-- /.row -->
+                        <?php // } ?>
+									</div><!-- /.span -->
+								</div><!-- /.row -->
+
+								</div><!-- PAGE CONTENT ENDS -->
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+
+			<!-- /.main-content -->

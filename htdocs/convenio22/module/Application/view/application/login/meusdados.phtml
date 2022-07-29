@@ -1,0 +1,134 @@
+<?php 
+
+use Zend\Session\Container;
+$usuario_dados = new Container('usuario_dados');
+
+?>
+
+			<!-- /section:basics/sidebar -->
+			<div class="main-content">
+				<div class="main-content-inner">
+					<!-- #section:basics/content.breadcrumbs -->
+					<div class="breadcrumbs" id="breadcrumbs">
+						<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+
+						<ul class="breadcrumb">
+							<li>
+								<i class="ace-icon fa fa-home home-icon"></i>
+								<a href="<?php echo $this->url('home', array('action'=>'index'));?>">Home</a>
+							</li>
+
+							<li class="active">Cadastrar novo colaborador</li>
+						</ul><!-- /.breadcrumb -->
+
+
+						<!-- /section:basics/content.searchbox -->
+					</div>
+
+					<!-- /section:basics/content.breadcrumbs -->
+					<div class="page-content">
+					
+						<div class="page-header">
+							<h3>
+								Cadastrar colaborador
+								<!--small>
+									<i class="ace-icon fa fa-angle-double-right"></i>
+									Common form elements and layouts
+								</small-->
+							</h3>
+						</div><!-- /.page-header -->
+                        
+                        
+
+						<div class="row">
+							<div class="col-xs-12">
+
+								<!-- PAGE CONTENT BEGINS -->
+								<form   class="form-horizontal"  id="meusdadosform" class="" role="form" action="<?php echo $this->url('login', array('action' => 'meusdados')); ?>" method="post"  enctype="application/x-www-form-urlencoded">
+									<!-- #section:elements.form -->
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Nome </label>
+
+										<div class="col-sm-9">
+											<input type="text" id="form-field-1" name="nome" class="col-xs-10 col-sm-5" required value="<?php echo $usuario_dados->nome;?>" />
+										</div>
+									</div>
+                                    
+                                    
+                                    <div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> CPF </label>
+
+										<div class="col-sm-9">
+											<input type="text" id="form-field-1" name="cpf" class="col-xs-10 col-sm-5" value="<?php echo $usuario_dados->cpf;?>"  />
+										</div>
+									</div>
+                                    
+                                    <div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Email </label>
+
+										<div class="col-sm-9">
+											<input type="text" id="form-field-1" name="email" class="col-xs-10 col-sm-5" value="<?php echo $usuario_dados->email;?>"  />
+										</div>
+									</div>
+                                    
+                                    <div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Telefone Fixo </label>
+
+										<div class="col-sm-9">
+											<input type="text" id="form-field-1" name="tel_fixo" class="col-xs-10 col-sm-5" required value="<?php echo $usuario_dados->tel_fixo;?>" />
+										</div>
+									</div> 
+                                    
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> CNPJ </label>
+
+										<div class="col-sm-9">
+											<input type="text" id="form-field-1" name="cnpj" class="col-xs-10 col-sm-5" value="<?php echo $usuario_dados->cnpj;?>"  />
+										</div>
+									</div>
+
+                                    
+                                    <div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Raz&atilde;o Social </label>
+
+										<div class="col-sm-9">
+											<input type="text" id="form-field-1" name="razao_social" class="col-xs-10 col-sm-5"  value="<?php echo $usuario_dados->razao_social;?>" />
+										</div>
+									</div>
+                                                                        
+                                    <div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Instituição </label>
+
+										<div class="col-sm-9">
+											<input type="text" id="form-field-1" name="instituicao" class="col-xs-10 col-sm-5"  value="<?php echo $usuario_dados->instituicao;?>"  />
+										</div>
+									</div>
+                                    
+                                    <!-- <div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Cargo/Função </label>
+
+										<div class="col-sm-9">
+											<input type="text" id="form-field-1" name="cargo_funcao" class="col-xs-10 col-sm-5" value="<?php echo $usuario_dados->cargo_funcao;?>"  />
+										</div>
+									</div> -->
+                                    
+                                      <div class="form-group">									
+										<div class="clearfix form-actions">
+											<div class="col-md-offset-3 col-md-9">
+												<button class="btn btn-info" type="submit">
+													<i class="ace-icon fa fa-check bigger-110"></i>
+													Salvar
+												</button>
+											</div>
+										</div>
+									</div>
+                        		</form>
+									
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+				</div><!-- /.main-content-inner -->
+			</div><!-- /.main-content -->
+

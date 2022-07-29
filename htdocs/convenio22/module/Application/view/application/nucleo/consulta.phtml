@@ -1,0 +1,147 @@
+<?php 
+
+$_SESSION['permissao'] = 8 ;
+
+?>
+			<!-- /section:basics/sidebar -->
+			<div class="main-content">
+            <script language="Javascript">
+				function confirmacao(id) {
+				     var resposta = confirm("Deseja remover esse registro?");
+				 
+				     if (resposta == true) {
+				          window.location.href = "<?php echo $this->url('nucleo/delete', array('action'=>'delete', 'id'=>'', 'area_id' => $area_id));?>"+id;
+				     }
+				}
+			</script> 	       	      
+				<div class="main-content-inner">
+					<!-- #section:basics/content.breadcrumbs -->
+					<div class="breadcrumbs" id="breadcrumbs">
+						<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+
+						<ul class="breadcrumb">
+							<li>
+								<i class="ace-icon fa fa-home home-icon"></i>
+								<a href="<?php echo $this->url('home', array('action'=>'index'));?>">Home</a>
+							</li>
+
+							<li class="active">Núcleos</li>
+						</ul><!-- /.breadcrumb -->
+
+						
+					</div>
+
+					<!-- /section:basics/content.breadcrumbs -->
+					<div class="page-content">
+						
+						<!-- /section:settings.box -->
+						<div class="page-header">
+							<h3>
+								Área: <?php echo $area->descricao; ?>							
+							</h3>
+						</div><!-- /.page-header -->
+
+						<div class="row">
+							<div class="col-xs-12">
+								<? if($_SESSION['permissao'] == 8){ ?>
+	                            <p>
+									<i class="ace-icon fa fa-angle-double-right"></i>
+									<a href="<?php echo $this->url('nucleo/add', array('action'=>'add', 'area_id' => $area_id));?>"> cadastrar novo núcleo</a> | 
+									<a href="<?php echo $this->url('area', array('action'=>'index'));?>"> voltar</a>
+								</p>
+                                <? } ?>
+								<!-- PAGE CONTENT BEGINS -->
+								<div class="row">
+									<div class="col-xs-12">
+                                    
+                                    
+										<table id="simple-table" class="table table-striped table-bordered table-hover">
+											<thead>
+												<tr>
+													<!--th class="center">
+														<label class="pos-rel">
+															<input type="checkbox" class="ace" />
+															<span class="lbl"></span>
+														</label>
+													</th-->
+													<th>Núcleos</th>
+													<th>Coordenador</th>
+                                                    <th>opções</th>
+													
+												</tr>
+											</thead>
+
+											<tbody>
+												<?php
+												  foreach($nucleos as $nucleo){ ?>
+	  												<tr>													
+														<td><?php echo ($nucleo['descricao']); ?></td>			
+														<td><?php echo $coordenadores_nucleo[$nucleo['coordenador_id']]; ?></td>								
+
+													<td>
+														<div class="hidden-sm hidden-xs btn-group">    
+														<? //if (($_SESSION['usuario_id'] != 367)|| ($_SESSION['usuario_id'] == 12) || ($_SESSION['usuario_id'] == 11)){ ?>
+															<a href="<?php echo $this->url('nucleo/edit', array('action'=>'edit', 'area_id' => $area_id,'id'=> $nucleo['id'])); ?>" class="btn btn-xs btn-info">
+																<i class="ace-icon fa fa-pencil bigger-120"></i>
+															</a>
+
+															<button class="btn btn-xs btn-danger" onclick="confirmacao('<?php echo  $nucleo['id']; ?>')">
+																<i class="ace-icon fa fa-trash-o bigger-120"></i>
+															</button>
+                                                        <? //} ?>
+
+															<!--button class="btn btn-xs btn-warning">
+																<i class="ace-icon fa fa-flag bigger-120"></i>
+															</button-->
+														</div>
+
+														<div class="hidden-md hidden-lg">
+															<div class="inline pos-rel">
+																<button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
+																	<i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+																</button>
+
+																<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+															<? //if (($_SESSION['usuario_id']!=367)|| ($_SESSION['usuario_id']==12) || ($_SESSION['usuario_id']==11)){ ?>
+																	<li>
+																		<a href="edit-representante-tce/<?php echo  $nucleo['id']; ?>" class="tooltip-success" data-rel="tooltip" title="Editar	">
+																			<span class="green">
+																				<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+																			</span>
+																		</a>
+																	</li>
+
+																	<li>
+																		<a href="javascript:func()" onclick="confirmacao('<?php echo  $nucleo['id']; ?>')" class="tooltip-error" data-rel="tooltip" title="Delete">
+																			<span class="red">
+																				<i class="ace-icon fa fa-trash-o bigger-120"></i>
+																			</span>
+																		</a>
+																	</li>
+                                                                    <?// } ?>
+																</ul>
+															</div>
+														</div>
+													</td>
+												</tr>
+                                                <?php } ?>
+
+												
+											</tbody>
+										</table>
+									</div><!-- /.span -->
+								</div><!-- /.row -->
+
+
+								<div class="row">
+									<div class="col-xs-12">
+									</div><!-- /.modal-content -->
+								</div><!-- /.modal-dialog -->
+									
+								</div><!-- PAGE CONTENT ENDS -->
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+			</div><!-- /.main-content -->

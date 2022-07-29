@@ -1,0 +1,74 @@
+<!-- /section:basics/sidebar -->
+<div class="main-content">
+    <div class="main-content-inner">
+        <!-- #section:basics/content.breadcrumbs -->
+        <div class="breadcrumbs" id="breadcrumbs">
+            <script type="text/javascript">
+                try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+            </script>
+
+            <ul class="breadcrumb">
+                <li>
+                    <i class="ace-icon fa fa-home home-icon"></i>
+                    <a href="<?php echo $this->url('home', array('action'=>'index')); ?>">Home</a>
+                </li>
+
+                <li class="active">Folha de ponto do colaborador</li>
+            </ul><!-- /.breadcrumb -->
+        </div>
+
+        <!-- /section:basics/content.breadcrumbs -->
+        <div class="page-content">
+            <!-- /section:settings.box -->
+            <div class="page-header">
+                <h1>
+                    Folha de ponto do colaborador:
+
+                </h1>
+            </div><!-- /.page-header -->
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <!-- PAGE CONTENT BEGINS -->
+                    <div class="row">
+                        <div class="col-xs-12">
+
+
+                            <div class="form-group">
+
+                                Colaborador:  	<strong><?php echo ($usuario->nome); ?></strong> <br />
+                                <br /><br />
+
+                                <form action="<?php echo $this->url('colaborador/get-folha-ponto', array('action'=> 'get-folha-ponto', 'usuario_id'=> $usuario->id)); ?>" method="post" target="_blank">
+
+                                    <div class="col-sm-9">
+
+                                        <label > Mês:</label>
+
+                                        <select name="mes">
+                                            <option value="">Selecione o mês...</option>
+                                            <?
+                                            foreach($arr_meses as $mes => $meses) {
+                                                print("<option value=\"$mes\"");
+                                                if ($mes == $mes_selecionado){ print("selected"); }
+                                                print(">$meses");
+                                            }
+                                            ?>
+                                            <option value="12-2019">Dezembro 2019</option>
+                                        </select>
+
+
+                                        &nbsp;<input type="submit" value=" IMPRIMIR " />
+
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div><!-- /.span -->
+                    </div><!-- /.row -->
+                </div><!-- PAGE CONTENT ENDS -->
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.page-content -->
+
+</div><!-- /.main-content -->

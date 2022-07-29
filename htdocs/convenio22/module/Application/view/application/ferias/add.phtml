@@ -1,0 +1,105 @@
+			<!-- /section:basics/sidebar -->
+			<div class="main-content">
+				<div class="main-content-inner">
+					<!-- #section:basics/content.breadcrumbs -->
+					<div class="breadcrumbs" id="breadcrumbs">
+						<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+
+						<ul class="breadcrumb">
+							<li>
+								<i class="ace-icon fa fa-home home-icon"></i>
+								<a href="<?php echo $this->url('home', array('action'=>'index'));?>">Home</a>
+							</li>
+
+							<li class="active">Cadastrar férias</li>
+						</ul><!-- /.breadcrumb -->
+
+
+						<!-- /section:basics/content.searchbox -->
+					</div>
+
+					<!-- /section:basics/content.breadcrumbs -->
+					<div class="page-content">
+					
+						<div class="page-header">
+							<h3>
+								Cadastrar Férias
+								<!--small>
+									<i class="ace-icon fa fa-angle-double-right"></i>
+									Common form elements and layouts
+								</small-->
+							</h3>
+						</div><!-- /.page-header -->
+
+						<div class="row">
+							<div class="col-xs-12">
+
+								<!-- PAGE CONTENT BEGINS -->
+								<form id="area_edit" name="area_edit" enctype="multipart/form-data" method="post" action="<?php echo $this->url('ferias/add', array('action' => 'add')); ?>" role="form" class="form-horizontal form-label-left">
+
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Colaborador:</label>
+
+                                        <div class="col-sm-9">
+
+                                            <select  class="form-control"  name="usuario_id" class="chosen-select" >
+                                                <option value=""></option>
+                                                <?php
+                                                foreach($colaboradores as $colaborador){
+                                                    ?>
+                                                    <option value="<?php echo ($colaborador['id']); ?>"><?php echo $colaborador['nome']; ?></option>
+                                                <?php 	} ?>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Periodo aquisitivo inicial: </label>
+
+										<div class="col-sm-4">
+											<input type="date" id="form-field-1" name="pa_inicio" class="col-xs-10 col-sm-5" required />
+										</div>
+									</div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Periodo aquisitivo final: </label>
+
+                                        <div class="col-sm-4">
+                                            <input type="date" id="form-field-1" name="pa_fim" class="col-xs-10 col-sm-5" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Data de início das féias: </label>
+
+                                        <div class="col-sm-4">
+                                            <input type="date" id="form-field-1" name="inicio" class="col-xs-10 col-sm-5" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Data de fim das férias: </label>
+
+                                        <div class="col-sm-4">
+                                            <input type="date" id="form-field-1" name="fim" class="col-xs-10 col-sm-5" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix form-actions">
+										<div class="col-md-offset-3 col-md-9">
+											<button class="btn btn-info" type="submit">
+												<i class="ace-icon fa fa-check bigger-110"></i>
+												Salvar
+											</button>
+										</div>
+									</div>
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+                        </form>
+					</div><!-- /.page-content -->
+				</div>
+			</div><!-- /.main-content -->

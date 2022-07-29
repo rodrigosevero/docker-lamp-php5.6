@@ -1,0 +1,172 @@
+<!-- /section:basics/sidebar -->
+<div class="main-content">
+    <script language="Javascript">
+        function confirmacao(id) {
+            var resposta = confirm("Deseja remover esse registro?");
+
+            if (resposta == true) {
+                //window.location.href = "<?php //echo $this->url('home', array('action'=>'index')); ?>"+id;
+            }
+        }
+    </script>
+
+    <div class="main-content-inner">
+        <!-- #section:basics/content.breadcrumbs -->
+        <div class="breadcrumbs" id="breadcrumbs">
+            <script type="text/javascript">
+                try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+            </script>
+
+            <ul class="breadcrumb">
+                <li>
+                    <i class="ace-icon fa fa-home home-icon"></i>
+                    <a href="<?php echo $this->url('home', array('action'=>'index')); ?>">Home</a>
+                </li>
+
+                <li class="active">Relatório de atividades</li>
+            </ul><!-- /.breadcrumb -->
+
+            <!-- /section:basics/content.searchbox -->
+        </div>
+
+        <!-- /section:basics/content.breadcrumbs -->
+        <div class="page-content">
+
+            <!-- /section:settings.box -->
+            <div class="page-header">
+                <h2>
+                    Relatório de atividades
+                </h2>
+            </div><!-- /.page-header -->
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <!-- PAGE CONTENT BEGINS -->
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <style>
+                                /* Add this attribute to the element that needs a tooltip */
+                                [data-tooltip] {
+                                    position: relative;
+                                    z-index: 2;
+                                    cursor: pointer;
+                                }
+
+                                /* Hide the tooltip content by default */
+                                [data-tooltip]:before,
+                                [data-tooltip]:after {
+                                    visibility: hidden;
+                                    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+                                    filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=0);
+                                    opacity: 0;
+                                    pointer-events: none;
+                                }
+
+                                /* Position tooltip above the element */
+                                [data-tooltip]:before {
+                                    position: absolute;
+                                    bottom: 150%;
+                                    left: 50%;
+                                    margin-bottom: 5px;
+                                    margin-left: -80px;
+                                    padding: 7px;
+                                    width: 160px;
+                                    -webkit-border-radius: 3px;
+                                    -moz-border-radius: 3px;
+                                    border-radius: 3px;
+                                    background-color: #000;
+                                    background-color: hsla(0, 0%, 20%, 0.9);
+                                    color: #fff;
+                                    content: attr(data-tooltip);
+                                    text-align: center;
+                                    font-size: 14px;
+                                    line-height: 1.2;
+                                }
+
+                                /* Triangle hack to make tooltip look like a speech bubble */
+                                [data-tooltip]:after {
+                                    position: absolute;
+                                    bottom: 150%;
+                                    left: 50%;
+                                    margin-left: -5px;
+                                    width: 0;
+                                    border-top: 5px solid #000;
+                                    border-top: 5px solid hsla(0, 0%, 20%, 0.9);
+                                    border-right: 5px solid transparent;
+                                    border-left: 5px solid transparent;
+                                    content: " ";
+                                    font-size: 0;
+                                    line-height: 0;
+                                }
+
+                                /* Show tooltip content on hover */
+                                [data-tooltip]:hover:before,
+                                [data-tooltip]:hover:after {
+                                    visibility: visible;
+                                    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+                                    filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=100);
+                                    opacity: 1;
+                                }
+                            </style>
+                            <p>
+                            <form action="<?php echo $this->url('relatorio-colaborador/atividade-mensal', array('action' => 'atividade-mensal'));?>" method="post">
+                                Mês:
+                                <select name="mes">
+                                    <option>Escolha o mês</option>
+                                    <option <? if ($mes == '01'){ echo "selected";} ?> value="01">Janeiro</option>
+                                    <option <? if ($mes == '02'){ echo "selected";} ?> value="02">Fevereiro</option>
+                                    <option <? if ($mes == '03'){ echo "selected";} ?> value="03">Março</option>
+                                    <option <? if ($mes == '04'){ echo "selected";} ?> value="04">Abril</option>
+                                    <option <? if ($mes == '05'){ echo "selected";} ?> value="05">Maio</option>
+                                    <option <? if ($mes == '06'){ echo "selected";} ?> value="06">Junho</option>
+                                    <option <? if ($mes == '07'){ echo "selected";} ?> value="07">Julho</option>
+                                    <option <? if ($mes == '08'){ echo "selected";} ?> value="08">Agosto</option>
+                                    <option <? if ($mes == '09'){ echo "selected";} ?> value="09">Setembro</option>
+                                    <option <? if ($mes == '10'){ echo "selected";} ?> value="10">Outubro</option>
+                                    <option <? if ($mes == '11'){ echo "selected";} ?> value="11">Novembro</option>
+                                    <option <? if ($mes == '12'){ echo "selected";} ?> value="12">Dezembro</option>
+                                </select>
+                                Ano:
+                                <select name="ano"><option  value="2018">2018</option></select>
+                                <input type="submit" value="ok" class="btn">
+
+                            </form>
+
+                            <span style="float:right"><a href="<?php echo $this->url('relatorio-colaborador/exportar-atividade-mensal', array('action'=>'exportar-atividade-mensal', 'mes' => $mes, 'ano' => $ano));?>">exportar</a></span>
+                            </p>
+
+                            <? if ($_POST){ ?>
+                            <table id="simple-table" class="table table-striped table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th width="30%">Nome</th>
+                                    <th width="30%">Data relatório</th>
+                                    <th>Descrição da atividade</th>
+
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <?php foreach($usuarios as $usuario){
+                                    $i = explode("||", $usuario['relatorio'])
+                                    ?>
+                                    <tr>
+                                        <td>
+                                            <?php echo ($usuario['nome']); ?>
+                                        </td>
+                                        <td><?php echo $i[0]; ?></td>
+                                        <td><?php echo $i[1]; ?></td>
+
+                                    </tr>
+                                <?php } ?>
+                                </tbody>
+                            </table>
+                            <? } ?>
+                        </div><!-- /.row -->
+
+                    </div><!-- PAGE CONTENT ENDS -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.page-content -->
+    </div>
+</div><!-- /.main-content -->

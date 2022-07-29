@@ -1,0 +1,67 @@
+<?php
+echo pack("CCC", 0xef, 0xbb, 0xbf);
+
+$html = "<table border='1'>";
+$html .= "<tr>";
+$html .= "<td><b>Bonificação</b></td>";
+$html .= "<td><b>Nome</b></td>";
+$html .= "<td><b>Quantidade</b></td>";
+$html .= "<td><b>Carga Horária</b></td>";
+$html .= "<td><b>nº de meses</b></td>";
+$html .= "<td><b>valor do salário mensal</b></td>";
+$html .= "<td><b>valor do total (R$)</b></td>";
+$html .= "<td><b>data admissão</b></td>";
+$html .= "<td><b>data inatividade</b></td>";
+$html .= "<td><b>área</b></td>";
+$html .= "</tr>";
+
+// foreach ($funcoes as $funcao) {
+//     $data_admissao =  $funcao['data_admissao'] ? date("d/m/Y", strtotime($funcao['data_admissao'])) : "";
+//     $data_inatividade = $funcao['data_inatividade'] ? date("d/m/Y", strtotime($funcao['data_inatividade'])) : "";
+//     $html .= "<tr>";
+//     $html .= "<td>" . ($funcao['funcao']) . "</td>";
+//     $html .= "<td>" . ($funcao['colaborador']) . "</td>";    
+//     $html .= "<td>" . ($funcao['quantidade']) . "</td>";
+//     $html .= "<td>" . ($funcao['carga_horaria']) . "</td>";
+//     $html .= "<td>" . ($funcao['meses']) . "</td>";
+//     $html .= "<td>" . number_format($funcao['valor_inicial'],2,",",".") . "</td>";
+//     $html .= "<td>" . number_format($funcao['valor_total'],2,",",".") . "</td>";
+//     $html .= "<td>" . $data_admissao . "</td>";
+//     $html .= "<td>" . $data_inatividade . "</td>";    
+//     $html .= "<td>" . ($funcao['area']) . "</td>";    
+//     $html .= "</tr>";
+// }
+
+
+
+foreach ($bonificacoes as $bonificacao) {
+    $data_admissao = $bonificacao['data_admissao'] ? date("d/m/Y", strtotime($bonificacao['data_admissao'])) : "". "</td>";
+    $data_inatividade = $bonificacao['data_inatividade'] ? date("d/m/Y", strtotime($bonificacao['data_inatividade'])) : "" . "</td>";    
+    $html .= "<tr>";
+    $html .= "<td>Bonificações - " . ($bonificacao['descricao']) . "</td>";
+    $html .= "<td>" . ($bonificacao['colaborador']) . "</td>";    
+    $html .= "<td>" . ($bonificacao['quantidade']) . "</td>";
+    $html .= "<td>" . ($bonificacao['carga_horaria']) . "</td>";
+    $html .= "<td>" . ($bonificacao['meses']) . "</td>";    
+    $html .= "<td>" . number_format($bonificacao['valor_inicial'],2,",",".") . "</td>";
+    $html .= "<td>" . number_format($bonificacao['valor_total'],2,",",".") . "</td>";    
+    $html .= "<td>" . $data_admissao. "</td>";
+    $html .= "<td>" . $data_inatividade. "</td>";    
+    $html .= "<td>" . ($bonificacao['area']) . "</td>";
+    $html .= "</tr>";
+}
+
+
+
+$html .= "</table>";
+
+$arquivo = 'bonificacoes.xls';
+header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+header("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
+header("Cache-Control: no-cache, must-revalidate");
+header("Pragma: no-cache");
+header("Content-type: application/x-msexcel");
+header("Content-Disposition: attachment; filename={$arquivo}");
+header("Content-Description: PHP Generated Data");
+
+echo   $html;

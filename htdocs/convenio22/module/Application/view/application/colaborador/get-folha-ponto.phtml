@@ -1,0 +1,173 @@
+<?php
+def("DOMPDF_ENABLE_REMOTE", false);
+use Zend\Session\Container;
+$usuario_dados = new Container('usuario_dados');
+ini_set('display_errors', 0);
+ini_set('log_errors', 0);
+error_reporting(E_ALL);
+switch ($mes) {
+        case "01":    $nome_mes = Janeiro;     break;
+        case "02":    $nome_mes= Fevereiro;   break;
+        case "03":    $nome_mes= Março;       break;
+        case "04":    $nome_mes= Abril;       break;
+        case "05":    $nome_mes= Maio;        break;
+        case "06":    $nome_mes= Junho;       break;
+        case "07":    $nome_mes= Julho;       break;
+        case "08":    $nome_mes= Agosto;      break;
+        case "09":    $nome_mes= Setembro;    break;
+        case "10":    $nome_mes= Outubro;     break;
+        case "11":    $nome_mes= Novembro;    break;
+        case "12":    $nome_mes= Dezembro;    break;
+        case "12-2019":    $nome_mes= Dezembro;    break;
+ }
+
+ //echo $mes;
+ if ($mes=="12-2019"){
+     $i=explode("-", $mes);
+    $numero_dia_mes = cal_days_in_month(CAL_GREGORIAN, $i[0], '2019'); // 31     
+ } else { 
+    $numero_dia_mes = cal_days_in_month(CAL_GREGORIAN, $mes, date("Y")); // 31
+ }
+//$nome_mes = array('', 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro');
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>RELATÓRIO MENSAL DE ATIVIDADES</title>
+    <style type="text/css">
+        body {
+            margin:0;
+            padding:0;
+            background:#FFFFFF;
+            text-align:center; /* hack para o IE */
+        }
+        #tudo {
+            width: 760px;
+            margin:0 auto;
+            text-align:left; /* "remÃ©dio" para o hack do IE */
+        }
+        #conteudo {
+            padding: 5px;
+            background-color: #FFF;
+        }
+        @media print {
+            .notprint { visibility:hidden; }
+        }
+        .atividades{
+            height: 600px;
+        }
+        .page-break {
+            page-break-after: always;
+        }
+
+
+        hr {
+            margin-top:2px;
+            margin-bottom: 5px;
+            border: 0;
+            border-top: 1px solid #eee;
+        }
+        p{
+            font-size: 10px;
+        }
+    </style>
+</head>
+
+<body>
+<div id="tudo">
+    <div id="conteudo">
+
+        <center>
+            <p><img src="<?php echo $this->basePath('public/img/topo.jpg'); ?>" /></p>
+            A inovação educacional e a pesquisa científica e tecnológica da UFMT à serviço do controle interno, externo e social do Tribunal de Contas do Estado de Mato Grosso
+            
+        </center>
+        <hr>
+        <div align="center"><h3>Registro de ponto</h3></div>
+<!--        <pre>--><?//=print_r($tipo_vinculo);?><!--</pre>-->
+
+                <p style="font-size: 15px">
+                    <strong style="font-size: 15px">Nome:</strong> <?=$usuario->nome;?><br>
+                    <strong>Tipo de vínculo:</strong> <?=$tipo_vinculo->descricao;?><br>
+                    <strong>Função:</strong> 
+                    <? if ($session_dados->permissao==14){ 
+                        echo "Estágio";}
+                        else { 
+                            foreach ($funcao as $f) {
+                                echo $f['funcao'];
+                            }
+                        }?><br />
+					<strong>Mês:</strong> <?=$nome_mes;?>
+                </p>
+
+
+        <table class="table table-bordered" border="1" width="100%">
+            <thead class="thead-inverse" style="border: 1px solid #000">
+            <tbody>
+            <tr>
+                <td style="text-align: center; vertical-align: middle" rowspan="2">Data</td>
+                <td style="text-align: center; vertical-align: middle" rowspan="2">Dia</td>
+                <td style="text-align: center;" colspan="2">Período: Matutino</td>
+                <td style="text-align: center;" colspan="2">Período: Vespertino</td>
+                <td style="text-align: center; vertical-align: middle" rowspan="2">Assinatura</td>
+            </tr>
+            <tr>
+                <td style="text-align: center; vertical-align: middle">&nbsp;Entrada</td>
+                <td style="text-align: center; vertical-align: middle">S&aacute;ida</td>
+                <td style="text-align: center; vertical-align: middle">Entrada</td>
+                <td style="text-align: center; vertical-align: middle">Saída</td>
+
+            </tr>
+            <?php
+            for ($dia = 1; $dia <= $numero_dia_mes; $dia++) {
+                $diasemana = array('Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado');
+                if ($mes=="12-2019"){
+                $i=explode("-", $mes);                
+                $data = date('2019-'.$i[0].'-'.$dia);
+                } else { 
+                $data = date(date(Y).'-'.$mes.'-'.$dia);
+                }
+                $diasemana_numero = date('w', strtotime($data));
+                $diasemana = $diasemana[$diasemana_numero];
+                if (($diasemana == 'Sábado')||($diasemana == 'Domingo')){ ?>
+                    <tr>
+                        <td style="text-align: center; vertical-align: middle"><?=$dia;?></td>
+                        <td style="text-align: center; vertical-align: middle"><?=$diasemana;?></td>
+                        <td style="text-align: center;"> ###### </td>
+                        <td style="text-align: center;"> ###### </td>
+                        <td style="text-align: center;"> ###### </td>
+                        <td style="text-align: center;"> ###### </td>
+                        <td style="text-align: center; vertical-align: middle"> ######</td>
+                    </tr>
+
+                <? } else { ?>
+
+                <tr>
+                    <td style="text-align: center; vertical-align: middle"><?=$dia;?></td>
+                    <td style="text-align: center; vertical-align: middle"><?=$diasemana;?></td>
+                    <td style="text-align: center;"></td>
+                    <td style="text-align: center;"></td>
+                    <td style="text-align: center;"></td>
+                    <td style="text-align: center;"></td>
+                    <td style="text-align: center; vertical-align: middle"></td>
+                </tr>
+                    <? } ?>
+
+
+            <? }  ?>
+
+
+
+            </tbody>
+            </thead>
+        </table>
+
+        <div align="center"><p>Assinatura do responsável:_______________________________________________________</p></div>
+
+
+
+    </div>
+</div>
+
+</body></html>

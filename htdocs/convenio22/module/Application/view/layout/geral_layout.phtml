@@ -1,0 +1,352 @@
+         <?php 
+if (defined('RUNNING_FROM_ROOT')) {
+  $this->plugin('basePath')->setBasePath($this->basePath().'/public');
+} ?>
+
+
+<?php 
+echo $this->doctype();
+use Zend\Session\Container;
+
+?>
+
+<html lang="pt_br">
+    <head>
+        <meta charset="utf-8" >
+        <?php echo $this->headTitle('ASIFMT '. $this->translate('ASIFMT'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <!-- Le styles -->
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+                        ->prependStylesheet('https://cdn.datatables.net/1.10.10/css/dataTables.bootstrap.min.css')
+                        ->prependStylesheet($this->basePath('css/style.css'))
+                        ->prependStylesheet($this->basePath('css/bootstrap.css'))
+                        ->prependStylesheet($this->basePath('css/modern-business.css'))
+                        ->prependStylesheet($this->basePath('css/dl-menu.css'))
+                        ->prependStylesheet($this->basePath('css/jquery.fancybox.css'))
+                        ->prependStylesheet($this->basePath('css/footer.css')) ?>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<style>
+
+.nav-pills > li > a {
+    border-radius: 0px;
+}
+.nav-tabs{
+    margin-left: 50px;
+}
+.dropdown-menu .sub-menu {
+    left: 100%;
+    position: absolute;
+    top: 0;
+    visibility: hidden;
+    margin-top: -1px;
+}
+
+.dropdown-menu li:hover .sub-menu {
+    visibility: visible;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.nav-tabs .dropdown-menu, .nav-pills .dropdown-menu, .navbar .dropdown-menu {
+    margin-top: 0;
+}
+
+.main-navigation > ul > li > a{
+	padding:16px 30px;
+}
+
+
+</style>
+        <!-- Scripts -->
+        <?php echo $this->headScript()
+           ->prependFile($this->basePath('js/bootstrap.min.js'))
+            ->prependFile($this->basePath('js/jquery.tablesorter.js'))
+            ->prependFile($this->basePath('js/jquery.tablesorter.widgets.js'))
+            ->prependFile($this->basePath('js/jquery.min.js'))
+            ->prependFile($this->basePath('js/pdfobject.js'))
+            ->prependFile($this->basePath('js/jquery.min.js'))
+            ->prependFile($this->basePath('js/jquery.fancybox.pack.js'))
+            ->prependFile($this->basePath('js/jquery.validate.min.js'))
+            ->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
+            ->prependFile($this->basePath('js/html5shiv.min.js'),   'text/javascript', array('conditional' => 'lt IE 9',))
+        ; ?>
+            
+       
+	    <style>
+	        
+			        /**/
+			        /* carousel */
+			#quote-carousel 
+			{
+			  padding: 0 10px 30px 10px;
+			  margin-top: 30px;
+			}
+			
+			/* Control buttons  */
+			#quote-carousel .carousel-control
+			{
+			  background: none;
+			  color: #222;
+			  font-size: 2.3em;
+			  text-shadow: none;
+			  margin-top: 30px;
+			}
+			/* Previous button  */
+			#quote-carousel .carousel-control.left 
+			{
+			  left: -12px;
+			}
+			/* Next button  */
+			#quote-carousel .carousel-control.right 
+			{
+			  right: -12px !important;
+			}
+			/* Changes the position of the indicators */
+			#quote-carousel .carousel-indicators 
+			{
+			  right: 50%;
+			  top: auto;
+			  bottom: 0px;
+			  margin-right: -19px;
+			}
+			/* Changes the color of the indicators */
+			#quote-carousel .carousel-indicators li 
+			{
+			  background: #c0c0c0;
+			}
+			#quote-carousel .carousel-indicators .active 
+			{
+			  background: #333333;
+			}
+			#quote-carousel img
+			{
+			  width: 250px;
+			  height: 100px
+			}
+			/* End carousel */
+			
+			.item blockquote {
+			    border-left: none; 
+			    margin: 0;
+			}
+			
+			.item blockquote img {
+			    margin-bottom: 10px;
+			}
+			
+			.item blockquote p:before {
+			    content: "\f10d";
+			    font-family: 'Fontawesome';
+			    float: left;
+			    margin-right: 10px;
+			}
+			
+			
+			
+			/**
+			  MEDIA QUERIES
+			*/
+			
+			/* Small devices (tablets, 768px and up) */
+			@media (min-width: 768px) { 
+			    #quote-carousel 
+			    {
+			      margin-bottom: 0;
+			      padding: 0 40px 30px 40px;
+			    }
+			    
+			}
+			
+			/* Small devices (tablets, up to 768px) */
+			@media (max-width: 768px) { 
+			    
+			    /* Make the indicators larger for easier clicking with fingers/thumb on mobile */
+			    
+			    #quote-carousel .carousel-indicators {
+			        bottom: -20px !important;  
+			    }
+			    #quote-carousel .carousel-indicators li {
+			        display: inline-block;
+			        margin: 0px 5px;
+			        width: 15px;
+			        height: 15px;
+			    }
+			    #quote-carousel .carousel-indicators li.active {
+			        margin: 0px 5px;
+			        width: 20px;
+			        height: 20px;
+			    }
+			}
+			        /**/
+			        
+			.carousel-control {
+			  padding-top:6%;
+			  width:5%;
+			}
+	        
+	    </style>
+    
+	    <script type="text/javascript">
+	
+	    	$(document).ready(function() {
+	    	  //Set the carousel options
+		    	  $('#quote-carousel').carousel({
+		    	    pause: true,
+		    	    interval: 4000,
+		    	  });
+		
+		  		  $(".fancybox").fancybox();  		
+	    	});
+		
+	    	function chamarPDF()
+	    	{	
+	        	PDFObject.embed("pdf/sample-3pp.pdf");
+	    	}
+	
+	    </script>
+    </head>       
+    
+    <body>    
+	    <div class="ec-main-wrapper">
+	        <header id="ec-header" class="ec-absolute">            
+	            <div class="ec-topbar" style="background-color: #222222; height:200px;">
+	                
+	                <div class="container">
+	                
+	                    <div class="row">
+	                    
+	                        <div class="col-md-5">                        
+	                    		<div class="row">
+	                        		<div class="col-md-4">
+		                            <a href="index.phtml" class="ec-logo"><img src="<?php echo $this->basePath('img/logo2.png'); ?>" height="50px;" alt=""></a>  
+		                            </div>
+	                        		<div class="col-md-8">
+		                            <span class="ec-stripinfo" style="font-size: 30px;  text-align: center; color: #FFFFFF;" >Associação de Servidores do IFMT</span>    
+		                            </div>
+		                        </div>                        
+	                        </div>
+	                        <div class="col-md-7">
+										<ul class="ec-stripinfo">
+											<li> <i style="color: #359830;" class="ec-color fa fa-cutlery"></i>
+												<div class="strip-info-text"  style="color:#FFFFFF; border-bottom-color: #359830; border-right-color: #359830; border-left-color: #359830;"> <span>Restaurante </span> <span style="text-transform:none; font-weight:normal;">Segunda - S&aacute;bado</span> 11:00 - 14:00 </div>
+											</li>
+											<li> 
+												<i style="color: #359830;"  class="ec-color fa fa-phone"></i>
+												<div class="strip-info-text"  style="color:#FFFFFF; border-bottom-color: #359830; border-right-color: #359830; border-left-color: #359830;"> <span>Fale conosco</span>  (65) 3644 - 4289 <br> <span style="text-transform:none; font-weight:normal;"> Atendimento ao Público: <br> 08:00 - 10:00 e  14:00 - 17:00</span></div>
+											</li>
+					                    
+											<li> <i style="color: #359830;" class="ec-color fa fa-map-marker"></i>
+												<div class="strip-info-text"  style="color:#FFFFFF; border-bottom-color: #359830; border-right-color: #359830; border-left-color: #359830;"> <span>Localiza&ccedil;&atilde;o</span> <a style="color: #FFFFFF;" href="https://www.google.com.br/maps/place/ASIFMT/@-15.576586,-56.069792,15z/data=!4m5!3m4!1s0x0:0xa01e0ef6624fb842!8m2!3d-15.576586!4d-56.069792?sa=X&ved=0ahUKEwjV7PXTvrXPAhXFvJAKHcZnCHcQ_BIIcjAP">Ver no mapa</a></div>
+											</li>
+										</ul>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	            
+	            <div class="container">
+	            
+	                <div class="ec-mainheader" style="border-bottom-color: #359830;">
+	                    <div class="ec-left-section" style="border-bottom-color: #359830;">
+	                        <nav class="main-navigation" style="border-bottom-color: #359830;">
+								
+								<ul class="nav nav-pills">
+								<li class="active"><a style="background-color: #359830; color: #FFFFFF;" href="<?php echo $this->url('home', array('action'=>'index'));?>"><i class="fa fa-home"></i></a></li>
+								<li class="dropdown">
+								  <a href="#" data-toggle="dropdown" class="dropdown-toggle">Institucional <b class="caret"></b></a>
+								  <ul class="dropdown-menu as-dropdown" id="menu1">
+						            <li><a href="<?php echo $this->url('institucional', array('action'=>'quemsomos'));?>">Quem Somos</a></li>
+                                    <li><a href="<?php echo $this->url('institucional', array('action'=>'historia'));?>">Nossa Hist&oacute;ria</a></li>
+                                    <li><a href="<?php echo $this->url('institucional', array('action'=>'lembrancas'));?>">Lembranças</a></li>
+                                    <li><a href="<?php echo $this->url('institucional', array('action'=>'diretoria'));?>">Diretoria</a></li>
+                                    <li><a href="<?php echo $this->url('institucional', array('action'=>'galeria'));?>">Galeria</a></li>								    
+								  </ul>
+								</li>
+								<li class="dropdown">
+								  <a href="<?php echo $this->url('noticia', array('action'=>'index'));?>">Not&iacute;cias</a>
+								</li>
+								
+								<li class="dropdown">
+								  <a href="<?php echo $this->url('evento', array('action'=>'index'));?>">Eventos</a>
+								</li>
+								<li class="dropdown">
+								  <a href="<?php echo $this->url('parceiro', array('action'=>'index'));?>">Parceiros</a>
+								</li>								
+								 
+								<li class="dropdown">
+								  <a href="<?php echo $this->url('evento', array('action'=>'index'));?>">Serviços</a>
+								</li>
+								<li class="dropdown">
+								  <a href="<?php echo $this->url('evento', array('action'=>'index'));?>">Agenda</a>
+								</li>
+								<li class="dropdown">
+								  <a href="<?php echo $this->url('evento', array('action'=>'index'));?>">Fale conosco</a>
+								</li>					
+								
+								
+								</ul>
+								
+	                        	<br>
+	                            
+	                        </nav>
+	                    </div> 
+						<a href="<?php echo $this->url('evento', array('action'=>'index'));?>" class="ec-getqoute ec-bgcolor" style="background-color: #359830;" data-toggle="modal" data-target="#myModal"><i class="fa fa-edit"></i> Me associar! </a> 
+	                </div>
+	                
+	            </div>        
+	        </header>
+	        </div>
+	        
+            <div class="container panel panel-default"  style="margin-top: 200px;" >
+    			<?php echo $this->content; ?>
+    		</div>     	
+        
+			<footer class="footer">
+				  <div class="social-follow">
+				    <span class="follow">Siga-nos</span>
+				    <div class="social-icons" itemscope itemtype="http://schema.org/Organization">    
+				        <a href="https://www.facebook.com/asifmt.associacaodoifmt" rel="me" class="icons-sprite sfooter-facebook" target="_blank" itemprop="sameAs" rel="me"></a>
+				    </div>
+				  </div>	  
+			
+			  <div class="main-footer">
+			  <!-- 
+			    <ul class="footer-links">
+					<li><a href="">Institucional</a></li>
+			        <li><a href="">Notícias</a></li>
+			        <li><a href="">Eventos</a></li>
+			        <li><a href="">Parceiros</a></li>
+			        <li><a href="">Documentos</a></li>
+			        <li><a href="">Serviços</a></li>
+			        <li><a href="">Agenda</a></li>
+			        <li><a href="">Contato</a></li>
+			    </ul>
+			 -->
+			    <div class="footer-subtext desktop">
+			        <span class="ddny">
+				        <i class="fa fa-phone"></i> Telefone: (65) 3644 - 4289 <br>
+						<i class="fa fa-envelope-o"></i> asetfmt@gmail.com <br>
+						<i class="fa fa-clock-o"></i> Atendimento ao Público: 08:00 - 10:00 e 14:00 - 17:00 <br>
+			        	<i class="fa fa-map"> </i> Endereço: Av. Ver. Juliano da Costa Marques - St. Oeste, Cuiabá - MT<br/>
+					</span>
+			
+			        <span class="copyright">
+			        <span>&copy; 2016 Desenvolvido por Laislla Ramos</span>
+			        <span><a href="">Fontes</a></span>
+			        </span>
+			    </div>
+			  </div>
+			</footer>
+    	
+           
+        <?php echo $this->inlineScript() ?>
+    </body>
+</html>

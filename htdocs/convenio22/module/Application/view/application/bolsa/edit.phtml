@@ -1,0 +1,156 @@
+<!-- /section:basics/sidebar -->
+<div class="main-content">
+	<div class="main-content-inner">
+		<!-- #section:basics/content.breadcrumbs -->
+		<div class="breadcrumbs" id="breadcrumbs">
+			<script type="text/javascript">
+				try {
+					ace.settings.check('breadcrumbs', 'fixed')
+				} catch (e) {}
+			</script>
+
+			<ul class="breadcrumb">
+				<li>
+					<i class="ace-icon fa fa-home home-icon"></i>
+					<a href="<?php echo $this->url('home', array('action' => 'index')); ?>">Home</a>
+				</li>
+
+				<li class="active">Cadastrar nova bolsa</li>
+			</ul><!-- /.breadcrumb -->
+
+
+			<!-- /section:basics/content.searchbox -->
+		</div>
+
+		<!-- /section:basics/content.breadcrumbs -->
+		<div class="page-content">
+
+			<div class="page-header">
+				<h3>
+					Cadastrar nova bolsa
+					<!--small>
+									<i class="ace-icon fa fa-angle-double-right"></i>
+									Common form elements and layouts
+								</small-->
+				</h3>
+			</div><!-- /.page-header -->
+
+			<div class="row">
+				<div class="col-xs-12">
+
+
+					<!-- PAGE CONTENT BEGINS -->
+					<form method="post" action="<?php echo $this->url('bolsa/edit', array('action' => 'edit', 'id' => $id)); ?>" role="form" enctype="multipart/form-data" class="form-horizontal form-label-left">
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Descrição </label>
+							<div class="col-sm-9">
+								<input type="text" id="form-field-1" value="<?php echo $bolsa->descricao; ?>" name="descricao" class="col-xs-10 col-sm-5" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Código </label>
+							<div class="col-sm-9">
+								<input type="text" id="form-field-1" value="<?php echo $bolsa->codigo; ?>" name="codigo" class="col-xs-10 col-sm-5" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Carga horária </label>
+							<div class="col-sm-4">
+								<input type="text" id="form-field-1" value="<?php echo $bolsa->carga_horaria; ?>" name="carga_horaria" class="col-xs-10 col-sm-5" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Meses </label>
+							<div class="col-sm-4">
+								<input type="text" id="form-field-1" value="<?php echo $bolsa->meses; ?>" name="meses" class="col-xs-10 col-sm-5" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Valor Inicial</label>
+							<div class="col-sm-4">
+								<input type="text" id="valor_inicial" value="<?php echo $bolsa->valor_inicial; ?>" name="valor_inicial" class="col-xs-10 col-sm-5" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Valor Médio</label>
+							<div class="col-sm-4">
+								<input type="text" id="valor_medio" value="<?php echo $bolsa->valor_medio; ?>" name="valor_medio" class="col-xs-10 col-sm-5" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Valor Final</label>
+							<div class="col-sm-4">
+								<input type="text" id="valor_final" value="<?php echo $bolsa->valor_final; ?>" name="valor_final" class="col-xs-10 col-sm-5" />
+							</div>
+						</div>
+
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Quantidade </label>
+
+							<div class="col-sm-4">
+								<input type="text" id="form-field-1" value="<?php echo $bolsa->quantidade; ?>" name="quantidade" class="col-xs-10 col-sm-5" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Requisitos </label>
+
+							<div class="col-sm-9">
+								<textarea id="form-field-1" name="requisitos" class="col-xs-10 col-sm-5" required style="width:100%" /><?php echo $bolsa->requisitos; ?></textarea>
+							</div>
+						</div>
+
+						<!-- <div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Coordenador de nucleo</label>
+
+										<div class="col-sm-9">
+
+                                            <select  class="form-control"  name="coordenador_id" >
+                                            <option></option>                                            
+                                            <?php
+											foreach ($coordenadores_nucleo as $usuario_id => $usuario_nome) { ?>	 
+                                            			<option value="<?php echo $usuario_id; ?>"><?php echo $usuario_nome; ?></option>
+											<?php 	}
+											?>	  
+                                            </select>
+										</div>
+									</div> -->
+						<div class="clearfix form-actions">
+							<div class="col-md-offset-3 col-md-9">
+								<button class="btn btn-info" type="submit">
+									<i class="ace-icon fa fa-check bigger-110"></i>
+									Salvar
+								</button>
+							</div>
+						</div>
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+			</form>
+		</div><!-- /.page-content -->
+	</div>
+</div><!-- /.main-content -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js" integrity="sha256-yE5LLp5HSQ/z+hJeCqkz9hdjNkk1jaiGG0tDCraumnA=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+	jQuery.noConflict();
+	jQuery(function($) {
+		$('#valor_inicial').mask('###0.000.000.000.000,00', {
+			reverse: true
+		});
+		$('#valor_medio').mask('###0.000.000.000.000,00', {
+			reverse: true
+		});
+		$('#valor_final').mask('###0.000.000.000.000,00', {
+			reverse: true
+		});
+	});
+</script>

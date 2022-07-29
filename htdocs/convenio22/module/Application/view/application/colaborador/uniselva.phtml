@@ -1,0 +1,323 @@
+			<!-- /section:basics/sidebar -->
+			<div class="main-content">
+				<script language="Javascript">
+					function confirmacao(id) {
+						var resposta = confirm("Deseja remover esse registro?");
+
+						if (resposta == true) {
+							window.location.href = "<?php echo $this->url('colaborador/delete', array('action' => 'delete', 'id' => '')); ?>" + id;
+						}
+					}
+				</script>
+				<style>
+					div.tooltips {
+						position: relative;
+						display: inline;
+						cursor: pointer;
+					}
+
+					div.tooltips span {
+						position: absolute;
+						width: 140px;
+						color: #FFFFFF;
+						background: #178BFF;
+						height: 49px;
+						line-height: 49px;
+						text-align: center;
+						visibility: hidden;
+						border-radius: 17px;
+					}
+
+					div.tooltips span:after {
+						content: '';
+						position: absolute;
+						bottom: 100%;
+						left: 50%;
+						margin-left: -8px;
+						width: 0;
+						height: 0;
+						border-bottom: 8px solid #178BFF;
+						border-right: 8px solid transparent;
+						border-left: 8px solid transparent;
+					}
+
+					div:hover.tooltips span {
+						visibility: visible;
+						opacity: 0.9;
+						top: 30px;
+						left: 50%;
+						margin-left: -76px;
+						z-index: 999;
+					}
+				</style>
+				<div class="main-content-inner">
+					<!-- #section:basics/content.breadcrumbs -->
+					<div class="breadcrumbs" id="breadcrumbs">
+						<script type="text/javascript">
+							try {
+								ace.settings.check('breadcrumbs', 'fixed')
+							} catch (e) {}
+						</script>
+
+						<ul class="breadcrumb">
+							<li>
+								<i class="ace-icon fa fa-home home-icon"></i>
+								<a href="<?php echo $this->url('home', array('action' => 'index')); ?>">Home</a>
+							</li>
+
+							<li class="active">Colaboradores</li>
+						</ul><!-- /.breadcrumb -->
+
+						<!-- /section:basics/content.searchbox -->
+					</div>
+
+					<!-- /section:basics/content.breadcrumbs -->
+					<div class="page-content">
+
+						<!-- /section:settings.box -->
+						<div class="page-header">
+							<h2>
+								Colaboradores
+
+							</h2>
+						</div><!-- /.page-header -->
+
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+								<div class="row">
+									<div class="col-xs-12">
+
+										
+
+										<form class="form-horizontal" role="form" action="" method="get">
+
+											<div class="form-group">
+												<label class="col-sm-1 control-label no-padding-right" for="form-field-1">Meta:</label>
+
+												<div class="col-sm-10">
+													<select name="meta">
+														<option value="">todos</option>
+														<?php foreach ($metas as $meta) { ?>
+															<option <?php if ($_GET['meta'] == $meta->id) {
+																		echo "selected";
+																	} ?> value="<? echo $meta->id; ?>">
+																<? echo $meta->descricao; ?>
+															</option>
+
+														<?php } ?>
+
+													</select>
+												</div>
+											</div>
+
+
+											<div class="form-group">
+												<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Status: </label>
+
+												<div class="col-sm-10">
+													<select name="status">
+														<option value="ativo">ativo</option>														
+													</select> &nbsp;
+												</div>
+											</div>
+
+
+											<!-- <div class="form-group">
+												<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Tipo de vinculo: </label>
+
+												<div class="col-sm-10">
+													<select name="tipo_vinculo">
+														<option value="">todos</option>
+														<?php foreach ($tipo_vinculos_bd as $tipo_vinculo) { ?>
+															<option <?php if ($_GET['tipo_vinculo'] == $tipo_vinculo->id) {
+																		echo "selected";
+																	} ?> value="<? echo $tipo_vinculo->id; ?>">
+																<? echo $tipo_vinculo->descricao; ?>
+															</option>
+
+														<?php } ?>
+
+													</select>
+												</div>
+											</div> -->
+
+											<div class="form-group">
+												<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> &nbsp; </label>
+
+												<div class="col-sm-10">
+													<input type="submit" value="filtrar">
+													</p>
+												</div>
+											</div>
+
+
+										</form>
+
+
+
+										</p>
+
+										<br />
+
+
+
+										<table id="simple-table" class="table table-striped table-bordered table-hover">
+											<thead>
+												<tr>
+													<th width="20%">>Nome</th>
+													<th width="15%">Área</th>
+													<th width="15%">Função</th>
+													<th>Projetos</th>
+													<th>Representantes</th>
+													<?php // if ($_SESSION['permissao'] == 8){ 
+													?>
+													<th>Vínculo</th>
+													<th>Enquadramento funcional</th>
+													<?php //} 
+													?>
+													<th width="5%">Tipo</th>
+													<th width="5%">Status</th>
+													<?php //if ($_SESSION['permissao']==8){ 
+													?>
+													<th>Opções</th>
+													<?php //} 
+													?>
+												</tr>
+											</thead>
+
+											<tbody>
+												<?php foreach ($colaboradores as $colaborador) {
+													$nome = explode(" ", $colaborador['nome']);
+													$firstname = $nome[0];
+													unset($nome[0]);
+													$lastname = implode(" ", $nome);
+												?>
+													<tr>
+														<td>
+															<?php echo ($colaborador['nome']); ?><br />
+															<small style="color:#999"><?php echo $colaborador['cpf']; ?>&nbsp;
+																<br><?php echo $colaborador['unidade_lotacao']; ?></small>
+														</td>
+														<td><?php echo ($areas[$colaborador['area_id']]); ?></td>
+														<td>
+															<? if ($colaborador['funcao'] != "") { ?>
+																<?php echo ($colaborador['funcao']); ?> - <?php echo ($colaborador['carga_horaria']); ?>h - <?php echo ($colaborador['meses']); ?> meses
+															<? } ?>
+															<!-- <? if ($colaborador['historico_funcoes'] > 0) { ?>
+													<div class="tooltips1" href="#"><small>histórico: <?= $colaborador['historico_funcoes']; ?></small>
+														<? } ?> -->
+														</td>
+														<td>
+															<!-- <a href="<?php echo $this->url('usuario-projeto/consulta', array('action' => 'consulta', 'usuario_id' => $colaborador['id'])); ?>"> -->
+															<span class="btn btn-sm" data-rel="popover" title="" data-content=""><?php if (isset($colaborador_projetos[$colaborador['id']])) {
+																																		echo count($colaborador_projetos[$colaborador['id']]);
+																																	} else {
+																																		echo '0';
+																																	} ?></span>
+															<!-- </a> -->
+														</td>
+
+														<td><?= $colaborador['representante']; ?><br />
+															<? if ($colaborador['historico_representantes'] > 0) { ?>
+																<div class="tooltips1" href="#"><small>histórico: <?= $colaborador['historico_representantes']; ?></small>
+																	<span><?php foreach ($representantes_usuario as $representante_usuario) {
+																				$representante_usuario['id'];
+																			} ?></span>
+																</div>
+															<? } ?>
+														</td>
+														<?php //if ($_SESSION['permissao'] == 8){ 
+														?>
+														<th>
+															<?php if (isset($tipo_vinculos[$colaborador['vinculo']])) {
+																echo $tipo_vinculos[$colaborador['vinculo']];
+															} ?>
+														</th>
+														<?php //} 
+														?>
+
+														<th>
+															<?php echo ($colaborador['status_enquadramento_funcional']); ?>
+														</th>
+														<td>
+															<?php echo ($colaborador['tipo']); ?>
+
+														</td>
+
+														<th>
+															<?php echo ($colaborador['status']); ?>
+
+															<?php if ($colaborador['status'] == 'inativo') {
+																echo date("d/m/Y", strtotime($colaborador['data_inatividade']));
+															} ?>
+														</th>
+														<?php //if ($_SESSION['permissao']==8){ 
+														?>
+														<td>
+															<?php /*if (($_SESSION['usuario_id']==367) || ($_SESSION['usuario_id']==365)  || ($_SESSION['usuario_id']==12) || ($_SESSION['usuario_id']==11) ){ ?>
+												<form action="" method="post">
+							                      <input type="hidden" name="id" value="1" />
+							                      	<button class="btn btn-info" type="submit">
+														<i class="ace-icon fa fa-check bigger-110"></i>
+														Resetar senha
+													</button>
+	                                            </form>
+                                             <?php } */ ?>
+															<div class="hidden-sm hidden-xs btn-group">
+
+																<a href="<?php echo $this->url('colaborador/uniselva-view', array('action' => 'add', 'id' => $colaborador['id'])); ?>" class="btn btn-xs btn-info">
+																	<i class="ace-icon fa fa-eye bigger-120"></i>
+																</a>
+
+
+
+																<?php //} 
+																?>
+
+															</div>
+
+															<div class="hidden-md hidden-lg">
+																<div class="inline pos-rel">
+																	<button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
+																		<i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+																	</button>
+
+																	<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+																		<?php //if ($_SESSION['permissao']==8){ 
+																		?>
+																		<li>
+																			<a href="<?php echo $this->url('colaborador/uniselva-view', array('action' => 'add', 'id' => $colaborador['id'])); ?>" class="tooltip-success" data-rel="tooltip" title="Editar	">
+																				<span class="green">
+																					<i class="ace-icon fa fa-eye-square-o bigger-120"></i>
+																				</span>
+																			</a>
+																		</li>
+																		<!--li>
+																		<a href="javascript:func()" onclick="confirmacao('<?php echo $colaborador['id']; ?>')" class="tooltip-error" data-rel="tooltip" title="Delete">
+																			<span class="red">
+																				<i class="ace-icon fa fa-trash-o bigger-120"></i>
+																			</span>
+																		</a>
+																	</li-->
+
+																	</ul>
+																</div>
+															</div>
+														</td>
+														<?php //} 
+														?>
+													</tr>
+												<?php } ?>
+
+
+											</tbody>
+										</table>
+									</div><!-- /.span -->
+								</div><!-- /.row -->
+							</div><!-- PAGE CONTENT ENDS -->
+						</div><!-- /.col -->
+					</div><!-- /.row -->
+				</div><!-- /.page-content -->
+			</div>
+			</div><!-- /.main-content -->
