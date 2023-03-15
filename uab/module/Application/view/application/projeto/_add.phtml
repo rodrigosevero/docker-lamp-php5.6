@@ -1,0 +1,314 @@
+<!-- /section:basics/sidebar -->
+			<div class="main-content">
+				<div class="main-content-inner">
+					<!-- #section:basics/content.breadcrumbs -->
+					<div class="breadcrumbs" id="breadcrumbs">
+						<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+
+						<ul class="breadcrumb">
+							<li>
+								<i class="ace-icon fa fa-home home-icon"></i>
+								<a href="<?php echo $this->url('home', array('action'=>'index'));?>">Home</a>
+							</li>
+
+							<li class="active">Cadastrar novo projeto</li>
+						</ul><!-- /.breadcrumb -->
+
+
+						<!-- /section:basics/content.searchbox -->
+					</div>
+
+					<!-- /section:basics/content.breadcrumbs -->
+					<div class="page-content">
+					
+						<div class="page-header">
+							<h3>
+								Cadastrar projeto
+								<!--small>
+									<i class="ace-icon fa fa-angle-double-right"></i>
+									Common form elements and layouts
+								</small-->
+							</h3>
+						</div><!-- /.page-header -->
+
+						<div class="row">
+							<div class="col-xs-12">
+
+								<!-- PAGE CONTENT BEGINS -->
+								<form id="projeto_add" name="projeto_add" enctype="multipart/form-data" method="post" onSubmit="validateForm(); return false;" action="<?php echo $this->url('projeto/add', array('action' => 'add'));?>" role="form" class="form-horizontal form-label-left">
+             
+             						<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Projeto Pai</label>
+
+									<div class="col-sm-9">
+
+                                            <select  class="form-control"  name="pai" class="chosen-select" >
+                                            <option value=""></option>
+                                            <?php
+                                            		foreach($projetospai as $pai){
+                                            ?>
+                                            		<option value="<?php echo ($pai['id']); ?>"><?=$pai['area']?> - <?php echo $pai['descricao']; ?></option>
+                                            <?php 	} ?>	  
+                                            </select>
+										</div>
+									</div>
+                                    
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Nome do projeto </label>
+
+										<div class="col-sm-9">
+											<input type="text" id="form-field-1" name="descricao" class="col-xs-10 col-sm-9" required />
+										</div>
+									</div>
+
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Código do projeto </label>
+
+                                        <div class="col-sm-9">
+                                            <input type="text" id="form-field-1" name="codigo_projeto" id="codigo_projeto" class="col-xs-10 col-sm-9" required />
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    <div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Responsável pela execução na unidade administrativa ou acadêmica </label>
+
+									<div class="col-sm-9">
+
+                                            <select  class="form-control"  name="coordenador_id" >
+                                            <option value=""></option>
+                                            <?php
+                                            		foreach($usuarios as $usuario){
+                                            ?>
+                                            		<option value="<?php echo ($usuario['id']); ?>"><?php echo $usuario['nome']; ?></option>
+                                            <?php 	} ?>	  
+                                            </select>
+										</div>
+									</div>
+                                    
+                                    
+                                     <div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Nome do coordenador no UAB/MPC </label>
+
+										<div class="col-sm-9">
+											<input type="text" id="form-field-1" name="coordenador_uab_mpc" class="col-xs-10 col-sm-9"  />
+										</div>
+									</div>
+                                    
+                                    
+                                    <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.js"></script>
+<?php 
+//echo $url_get_projetos = $this->serverUrl();//.$this->url('colaborador/get-projetos', array('action'=>'get-projetos', 'id' => ''));
+//$url_get_projetos = str_replace('https', 'http', $url_get_projetos);
+?>            
+    <script type="text/javascript">
+//	$(document).ready(function() {
+//
+//        $('#estado').change(function() {
+//
+//    		var ajax_url = <?//=$this->serverUrl();?>//"/uab/projetos/projeto/listacidade/"+$('#estado').val();
+//    		//var ajax_url = "/uab/convenio/projeto/listacidade/"+$('#estado').val();
+//    		 $.ajax({
+// 	            type: "POST",
+// 	            url: ajax_url,
+// 	            data: "area="+$(this).val(),
+// 	            success: function(msg){
+// 	                $("#nucleo_id").html(msg);
+// 	        }
+// 	     });
+//        });
+//	});
+
+window.onload = function() {
+    $(document).ready(function () {
+        $('#estado').change(function() {
+            $.post( "/uab/projetos/projeto/listacidade/"+$('#estado').val(), { area: ""+$('#estado').val()},function(data){
+                $("#nucleo_id").html(data);
+            } );
+
+        });
+    });
+};
+
+
+    </script>
+    
+     <div class="form-group" >
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Tipo</label>
+
+										<div class="col-sm-9">
+
+                                            <select  class="form-control"  name="tipo_projeto" >
+                                            <option value=""></option>
+                                            <?php
+                                            	foreach($tipos_projeto as $tipo_projeto){
+                                            ?>
+                                            		<option value="<?php echo $tipo_projeto['id']; ?>"><?php echo $tipo_projeto['descricao']; ?></option>
+                                            <?php 	} ?>	  
+                                            </select>
+                                       </div>
+                                       
+                                       </div>
+		
+        
+        
+        
+                                <script language="JavaScript" type="text/javascript">
+   function mascaraData(campoData){
+              var data = campoData.value;
+              if (data.length == 2){
+                  data = data + '/';
+                  document.forms[0].data_inicio.value = data;
+      return true;              
+              }
+              if (data.length == 5){
+                  data = data + '/';
+                  document.forms[0].data_inicio.value = data;
+                  return true;
+              }
+         }
+
+   function mascaraData1(campoData){
+              var data = campoData.value;
+              if (data.length == 2){
+                  data = data + '/';
+                  document.forms[0].data_fim.value = data;
+      return true;              
+              }
+              if (data.length == 5){
+                  data = data + '/';
+                  document.forms[0].data_fim.value = data;
+                  return true;
+              }
+         }
+		 
+
+</script>
+
+
+<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Data In&iacute;cio </label>
+
+										<div class="col-sm-9">
+											<input type="text" id="form-field-1" OnKeyUp="mascaraData(this);" maxlength="10" name="data_inicio" value="" class="col-xs-10 col-sm-5"  />
+										</div>
+									</div>
+                                    
+
+                                    
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Data Fim</label>
+
+										<div class="col-sm-9">
+											<input type="text" id="form-field-1" OnKeyUp="mascaraData1(this);" name="data_fim" value="" class="col-xs-10 col-sm-5"  />
+										</div>
+									</div>
+                                    
+                                    
+                                     <div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Carga Horária</label>
+
+										<div class="col-sm-9">
+											<input type="text" class="form-field-1" name="carga_horaria" class="col-xs-10 col-sm-9" value="<?=$r['carga_horaria'];?>" />
+										</div>
+									</div>
+                                    
+                                    <div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Vagas ofertadas</label>
+
+										<div class="col-sm-9">
+											<input type="text" class="form-field-1" name="vagas_ofertadas" class="col-xs-10 col-sm-9" value="<?=$r['vagas_ofertadas'];?>" />
+										</div>
+									</div>
+                                    
+                                      <div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Entidade Certificadora </label>
+
+										<div class="col-sm-9">
+
+
+                                            <select  class="form-control"  name="entidade_certificadora" >
+                                            <option value=""></option>
+                                                <option <? if ($projeto->entidade_certificadora == 'UFMT'){ ?> selected="selected" <? } ?> value="UFMT">UFMT</option>
+                                                <option <? if ($projeto->entidade_certificadora == 'Outra instituição parceira'){ ?> selected="selected" <? } ?> value="Outra instituição parceira">Outra instituição parceira</option>
+                                                <option <? if ($projeto->entidade_certificadora == 'UFMT e outra instituição parceria'){ ?> selected="selected" <? } ?> value="UFMT e outra instituição parceria">UFMT e outra instituição parceria</option>
+                                            </select>
+										</div>
+									</div>
+                                    
+                                    <div class="form-group">
+												<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Status</label>
+
+												<div class="radio">
+
+                                                    <label>
+                                                        <input  type="radio" name="status" value="não iniciado"  checked="checked" <? } ?> class="ace" />
+                                                        <span class="lbl"> não iniciado</span>
+                                                    </label>
+
+													<label>
+														<input  type="radio" name="status" value="em andamento" <?php if ($r['status']=='em andamento'){ ?> checked="checked" <? } ?> class="ace" />
+														<span class="lbl"> em andamento</span>
+													</label>
+												&nbsp;&nbsp;
+													<label>
+														<input  type="radio" name="status" value="concluido" <?php if ($r['status']=='concluido'){ ?> checked="checked" <? } ?> class="ace" />
+														<span class="lbl"> conclu&iacute;do</span>
+													</label>
+                                                    
+                                                    <label>
+														<input  type="radio" name="status" value="prorrogado" <?php if ($r['status']=='prorrogado'){ ?> checked="checked" <? } ?> class="ace" />
+														<span class="lbl"> prorrogado</span>
+													</label>
+												</div>
+                                          </div>						
+                                    
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Área</label>
+
+										<div class="col-sm-9">
+
+                                            <select  class="form-control"  name="area_id" id="estado" required>
+                                            <option value=""></option>
+                                            <?php
+                                            	foreach($areas as $area){
+                                            ?>
+                                            		<option value="<?php echo $area['id']; ?>"><?php echo $area['descricao']; ?></option>
+                                            <?php 	} ?>	  
+                                            </select>
+										</div>
+									</div>
+                                                                        
+	                                <div class="form-group">
+		                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Núcleo</label>
+		                                <div class="col-sm-9">		                                
+		                                	<div id="nucleo"></div>
+                                            <select  class="form-control"  name="nucleo_id" id="nucleo_id">
+                                            </select>
+		                                </div>
+	                                </div>
+                                    
+                                    
+                                    
+                                    
+                                                                  
+
+									
+									<div class="clearfix form-actions">
+										<div class="col-md-offset-3 col-md-9">
+											<button class="btn btn-info" type="submit">
+												<i class="ace-icon fa fa-check bigger-110"></i>
+												Salvar
+											</button>
+										</div>
+									</div>
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+                        </form>
+					</div><!-- /.page-content -->
+				</div>
+			</div><!-- /.main-content -->

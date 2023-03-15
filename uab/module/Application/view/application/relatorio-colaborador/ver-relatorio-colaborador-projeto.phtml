@@ -1,0 +1,89 @@
+<!-- /section:basics/sidebar -->
+<div class="main-content">
+    <div class="main-content-inner">
+        <!-- #section:basics/content.breadcrumbs -->
+        <div class="breadcrumbs" id="breadcrumbs">
+            <script type="text/javascript">
+                try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+            </script>
+
+            <ul class="breadcrumb">
+                <li>
+                    <i class="ace-icon fa fa-home home-icon"></i>
+                    <a href="<?php echo $this->url('home', array('action'=>'index')); ?>">Home</a>
+                </li>
+
+                <li class="active">Relatório do colaborador</li>
+            </ul><!-- /.breadcrumb -->
+        </div>
+
+        <!-- /section:basics/content.breadcrumbs -->
+        <div class="page-content">
+            <!-- /section:settings.box -->
+            <div class="page-header">
+                <h1>
+                    Relatório do colaborador:
+
+                </h1>
+            </div><!-- /.page-header -->
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <!-- PAGE CONTENT BEGINS -->
+                    <div class="row">
+                        <div class="col-xs-12">
+
+
+
+                            <div class="form-group">
+
+                                Colaborador:  	<strong><?php echo ($usuario->nome); ?></strong> <br />
+                                Projeto: 		<strong><?php echo ($projeto->descricao); ?></strong>
+                                <br /><br />
+                                
+                                <?php
+                                $form_action = "";
+
+                                switch ($usuario->vinculo) {
+									//case '1': $form_action = 'get-relatorio-servicos'; break;
+                                    case '2': $form_action = 'get-relatorio-servicos'; break; // Docente substituto na UFMT
+                                    case '14': $form_action = 'get-relatorio-servicos'; break; // Docente efetivo em outra instituição publica
+									case '15': $form_action = 'get-relatorio-servicos'; break; // Tecnico Efetivo de outra instituição publica
+									case '16': $form_action = 'get-relatorio-servicos'; break; // Docente aposentado
+									case '17': $form_action = 'get-relatorio-servicos'; break; // Tecnico aposentado - UFMT
+									case '18': $form_action = 'get-relatorio-servicos'; break; // Termo de compromisso de bolsista
+									case '19': $form_action = 'get-relatorio-servicos'; break; // Docente contratado de outra instituição publica
+									default: $form_action = 'get-relatorio-mensal-atividade'; break;
+                                    //default: $form_action = 'get-relatorio-matriz-responsabilidade'; break;
+
+                                }
+                                // echo $form_action;
+                                //$form_action = 'get-relatorio-mensal-atividade';
+                                ?>
+                                <form action="<?php echo $this->url('relatorio-colaborador/'.$form_action, array('action'=> $form_action, 'id'=> $id, 'usuario_id'=> $usuario->id)); ?>" method="post" target="_blank">
+
+                                    <div class="col-sm-9">
+
+                                        <label > Mês:</label>
+
+                                        <select name="mes" class="" required>
+                                            <option value="">selecione...</option>
+
+                                            <?php foreach($usuario_atividades_meses as $usuario_atividade ){ ?>
+                                                <option value="<?php echo $usuario_atividade['mes']?>/<?php echo $usuario_atividade['ano']?>/<?php echo $usuario_atividade['id']?>"><?php echo $usuario_atividade['mes']?>/<?php echo $usuario_atividade['ano']?></option>
+                                            <?php } ?>
+                                        </select>
+                                        &nbsp;<input type="submit" value=" IMPRIMIR " />
+
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div><!-- /.span -->
+                    </div><!-- /.row -->
+                </div><!-- PAGE CONTENT ENDS -->
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.page-content -->
+
+</div><!-- /.main-content -->

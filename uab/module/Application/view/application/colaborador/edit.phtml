@@ -1,0 +1,379 @@
+<!-- /section:basics/sidebar -->
+<div class="main-content">
+	<div class="main-content-inner">
+		<!-- #section:basics/content.breadcrumbs -->
+		<div class="breadcrumbs" id="breadcrumbs">
+			<script type="text/javascript">
+				try {
+					ace.settings.check('breadcrumbs', 'fixed')
+				} catch (e) {}
+			</script>
+
+			<ul class="breadcrumb">
+				<li>
+					<i class="ace-icon fa fa-home home-icon"></i>
+					<a href="<?php echo $this->url('home', array('action' => 'index')); ?>">Home</a>
+				</li>
+
+				<li class="active">Cadastrar novo colaborador</li>
+			</ul><!-- /.breadcrumb -->
+
+
+			<!-- /section:basics/content.searchbox -->
+		</div>
+
+		<!-- /section:basics/content.breadcrumbs -->
+		<div class="page-content">
+
+			<div class="page-header">
+				<h3>
+					Cadastrar colaborador
+				</h3>
+			</div><!-- /.page-header -->
+
+			<div class="row">
+				<div class="col-xs-12">
+
+					<!-- PAGE CONTENT BEGINS -->
+					<form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+						<!-- #section:elements.form -->
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Nome </label>
+
+							<div class="col-sm-9">
+								<input type="text" id="nome" name="nome" value="<?php echo $colaborador->nome; ?>" class="col-xs-10 col-sm-5" required />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Email </label>
+
+							<div class="col-sm-9">
+								<input type="email" id="email" name="email" value="<?php echo $colaborador->email; ?>" class="col-xs-10 col-sm-5" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Telefone Fixo </label>
+
+							<div class="col-sm-9">
+								<input type="text" id="tel_fixo" name="tel_fixo" value="<?php echo $colaborador->tel_fixo; ?>" class="col-xs-10 col-sm-5" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Telefone Móvel </label>
+
+							<div class="col-sm-9">
+								<input type="text" id="tel_movel" name="tel_movel" value="<?php echo $colaborador->tel_movel; ?>" class="col-xs-10 col-sm-5" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> CPF </label>
+
+							<div class="col-sm-9">
+								<input type="text" id="cpf1" name="cpf" value="<?php echo $colaborador->cpf; ?>" class="col-xs-10 col-sm-5" />
+							</div>
+						</div>
+
+						<!--div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right"  for="form-field-1"> CNPJ </label>
+
+										<div class="col-sm-9">
+											<input type="text" id="cnpj" name="cnpj" value="<?php echo $colaborador->cnpj; ?>" class="col-xs-10 col-sm-5"  />
+										</div>
+									</div-->
+
+						<!--div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right"  for="form-field-1"> Instituição </label>
+
+										<div class="col-sm-9">
+											<input type="text" id="instituicao" name="instituicao" value="<?php echo $colaborador->instituicao; ?>" class="col-xs-10 col-sm-5"  />
+										</div>
+									</div-->
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Curso </label>
+
+							<div class="col-sm-9">
+								<input type="text" id="curso" name="curso" value="<?php echo $colaborador->curso; ?>" class="col-xs-10 col-sm-5" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Pólo </label>
+
+							<div class="col-sm-9">
+								<input type="text" id="polo" name="polo" value="<?php echo $colaborador->polo; ?>" class="col-xs-10 col-sm-5" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Tipo de processo seletivo </label>
+
+							<div class="col-sm-9">
+								<input type="text" id="tipo_processo_seletivo" name="tipo_processo_seletivo" value="<?php echo $colaborador->tipo_processo_seletivo; ?>" class="col-xs-10 col-sm-5" />
+							</div>
+						</div>
+
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Número do edital</label>
+
+							<div class="col-sm-9">
+								<input type="text" id="nu_edital" name="nu_edital" value="<?php echo $colaborador->nu_edital; ?>" class="col-xs-10 col-sm-5" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Data Admissão </label>
+
+							<div class="col-sm-9">
+								<input type="date" id="data_admissao" name="data_admissao" value="<?php echo $colaborador->data_admissao; ?>" class="col-xs-10 col-sm-5" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Cargo </label>
+
+							<div class="col-sm-9">
+								<input type="text" id="cargo_funcao" value="<?php echo $colaborador->cargo_funcao; ?>" name="cargo_funcao" class="col-xs-10 col-sm-5" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1" class="col-xs-10 col-sm-2">Função: </label>
+
+							<div class="col-sm-9">
+								<input type="text" id="funcao" name="funcao" value="<?php echo $colaborador->funcao; ?>" class="col-xs-10 col-sm-5" />
+							</div>
+						</div>
+
+
+
+						<!--div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right"  for="form-field-1"> Raz&atilde;o Social </label>
+
+										<div class="col-sm-9">
+											<input type="text" id="razao_social" name="razao_social" value="<?php echo $colaborador->razao_social; ?>" class="col-xs-10 col-sm-5"  />
+										</div>
+									</div-->
+
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Vínculo</label>
+
+							<div class="col-sm-4">
+
+								<select name="vinculo" class="form-control" id="vinculo">
+									<option></option>
+									<?php foreach ($tipo_vinculos as $tipo_vinculo) { ?>
+										<option <?php if ($colaborador->vinculo == $tipo_vinculo->id) {
+													echo "selected";
+												} ?> value="<?php echo $tipo_vinculo->id; ?>"><?php echo $tipo_vinculo->descricao; ?></option>
+									<?php } ?>
+								</select>
+							</div>
+						</div>
+
+
+						<!--div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1">  Status do enquadramento funcional: </label>
+
+										<div class="col-sm-9">
+								<input type="text" id="status_enquadramento_funcional" name="status_enquadramento_funcional" value="<?php echo $colaborador->status_enquadramento_funcional; ?>"  class="col-xs-10 col-sm-2"  />
+										</div>
+									</div>
+                                    
+                                      <div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right"  for="form-field-1"> Unidade que o colaborador atuará: </label>
+
+										<div class="col-sm-9">
+											<input type="text" id="unidade_lotacao" name="unidade_lotacao" value="<?php echo $colaborador->unidade_lotacao; ?>" class="col-xs-10 col-sm-5"  />
+										</div>
+									</div-->
+
+
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Tipo</label>
+
+							<div class="col-sm-9">
+
+								<?php foreach ($permissoes as $permissao) { ?>
+
+									<div class="radio">
+										<?php if ($permissao['id'] == $colaborador->permissao) { ?>
+											<label>
+												<input checked="checked" type="radio" class="ace" name="permissao" value="<?php echo $permissao['id']; ?>" />
+												<span class="lbl"> <?php echo $permissao['descricao']; ?></span>
+											</label>
+										<?php } else { ?>
+											<label>
+												<input type="radio" class="ace" name="permissao" value="<?php echo $permissao['id']; ?>" />
+												<span class="lbl"> <?php echo $permissao['descricao']; ?></span>
+											</label>
+										<?php } ?>
+									</div>
+
+								<?php } ?>
+
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Status</label>
+
+							<div class="col-sm-2">
+
+								<select name="status" class="form-control" id="status">
+									<option value="">Selecione...</option>
+
+									<option <?php if ($colaborador->status == 'ativo') {
+												echo "selected";
+											} ?> value="ativo">ativo</option>
+									<option <?php if ($colaborador->status == 'inativo') {
+												echo "selected";
+											} ?> value="inativo">inativo</option>
+								</select>
+
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Data inatividade:</label>
+
+							<div class="col-sm-4">
+								<input type="date" id="data_inativadade" name="data_inativadade" value="<?php echo $colaborador->data_inatividade; ?>" class="col-xs-10 col-sm-5" />
+							</div>
+						</div>
+
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Declaração/Termo de autorização:</label>
+
+							<div class="col-sm-9">
+								<p><input type="file" class="form-field-1" name="arquivo" class="col-xs-10 col-sm-9" /></p>
+
+								<? $nomeArquivo = '../../public/colaborador-anexo/' . $colaborador->arquivo; ?>
+								<br>
+								<?php if (isset($colaborador->arquivo) != "") { ?> Download do arquivo:
+									<a href="<?php echo $nomeArquivo; ?>"><?= $colaborador->arquivo; ?></a>
+									<br>
+									<label><input type="checkbox" name="delete_anexo" value="1"> Marque para excluir o arquivo</label>
+								<?php } ?>
+
+
+
+							</div>
+						</div>
+
+						<div class="form-group" id="conteudo">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Representante:</label>
+
+							<div class="col-sm-9">
+
+								<select class="form-control" name="representante_id">
+									<option value="0"></option>
+									<?php foreach ($representantes as $representante) {
+										if ($colaborador->representante_id == $representante['id']) { ?>
+											<option selected="selected" value="<?php echo $representante['id']; ?>"><?php echo ($representante['nome']); ?></option>
+										<?php } else { ?>
+											<option value="<?php echo $representante['id']; ?>"><?php echo ($representante['nome']); ?></option>
+									<?php 		}
+									} ?>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-group" id="conteudo">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Área</label>
+
+							<div class="col-sm-9">
+
+								<select class="form-control" name="area_id" id="estado">
+									<option value="0"></option>
+									<?php foreach ($areas as $area) {
+										if ($colaborador->area_id == $area['id']) { ?>
+											<option selected="selected" value="<?php echo $area['id']; ?>"><?php echo ($area['descricao']); ?></option>
+										<?php } else { ?>
+											<option value="<?php echo $area['id']; ?>"><?php echo ($area['descricao']); ?></option>
+									<?php 		}
+									} ?>
+								</select>
+							</div>
+						</div>
+
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Representante legal:</label>
+
+							<div class="col-sm-2">
+
+							<select name="is_representante" class="form-control" id="is_representante">
+									<option value="">Selecione...</option>
+
+									<option <?php if ($colaborador->is_representante == 1) {
+												echo "selected";
+											} ?> value="1">sim</option>
+									<option <?php if ($colaborador->is_representante == 0) {
+												echo "selected";
+											} ?> value="0">não</option>
+								</select>
+							</div>
+						</div>
+
+
+
+						<div class="form-group">
+
+
+							<div class="clearfix form-actions">
+								<div class="col-md-offset-3 col-md-">
+									<button class="btn btn-info" type="submit">
+										<i class="ace-icon fa fa-check bigger-110"></i>
+										Salvar
+									</button>
+					</form>
+					<!--span style="float:right">
+                                             <form action="" method="post">
+							                      <input type="hidden" name="id" value="1" />
+							                      <button class="btn btn-info" type="submit">
+												<i class="ace-icon fa fa-check bigger-110"></i>
+												Resetar senha
+											</button>
+                                            </form></span-->
+				</div>
+			</div>
+		</div><!-- /.col -->
+	</div><!-- /.row -->
+</div><!-- /.main-content -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
+<script src="dist/jquery.maskMoney.min.js" type="text/javascript"></script>
+<script>
+	$("#cpf").mask("999.999.999-99");
+	$("#cnpj").mask("99.999.999/9999-99");
+
+	$("#tel_movel").mask("(99) 99999999?9");
+	$("#tel_movel").blur(function(event) {
+		var verificastring = $(this).val().substring($(this).val().length - 1, $(this).val().length);
+		if ($(this).val().length == 15) {
+			$("#tel_movel").mask("(99) 99999999?9");
+		} else {
+			$("#tel_movel").mask("(99) 99999999?9");
+		}
+	});
+
+	$("#tel_fixo").mask("(99) 99999999?9");
+	$("#tel_fixo").blur(function(event) {
+		var verificastring = $(this).val().substring($(this).val().length - 1, $(this).val().length);
+		if ($(this).val().length == 15) {
+			$("#tel_fixo").mask("(99) 99999999?9");
+		} else {
+			$("#tel_fixo").mask("(99) 99999999?9");
+		}
+	});
+</script>

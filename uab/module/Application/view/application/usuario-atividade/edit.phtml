@@ -1,0 +1,259 @@
+			<!-- /section:basics/sidebar -->
+			<div class="main-content">
+				<div class="main-content-inner">
+					<!-- #section:basics/content.breadcrumbs -->
+					<div class="breadcrumbs" id="breadcrumbs">
+						<script type="text/javascript">
+							try {
+								ace.settings.check('breadcrumbs', 'fixed')
+							} catch (e) {}
+						</script>
+
+						<ul class="breadcrumb">
+							<li>
+								<i class="ace-icon fa fa-home home-icon"></i>
+								<a href="<?php echo $this->url('home', array('action' => 'index')); ?>">Home</a>
+							</li>
+
+							<li class="active">Lançamento de atividade mensal</li>
+						</ul><!-- /.breadcrumb -->
+					</div>
+
+					<!-- /section:basics/content.breadcrumbs -->
+					<div class="page-content">
+
+						<div class="page-header">
+							<h1>
+								Lançamento de atividade mensal
+							</h1>
+						</div>
+
+
+						<script type="text/javascript">
+							var rec = "O preenchimento do campo é obrigatório";
+
+							function aviso($campo) {
+								if ("" == document.meuform.campo.value) {
+									document.write("preenchimento obrigatorio");
+									return false;
+								} else {
+									return true;
+								}
+							}
+						</script>
+						<?
+						function br2nl($string)
+						{
+							return preg_replace('/\<br(\s*)?\/?\>/i', "\n", $string);
+						}  ?>
+						<form name="meuform" class="form-horizontal" role="form" action="<?php echo $this->url('usuario-atividade/edit', array('action' => 'edit', 'id' => $id)); ?>" method="post">
+
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Nome do Projeto: </label>
+								<div class="col-sm-9">
+									<DIV class="col-xs-10 col-sm-8"><strong><?php echo ($projeto->descricao); ?></strong></DIV>
+								</div>
+							</div>
+
+
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Disciplina:</label>
+								<div class="col-sm-9">
+									<input type="text" id="form-field-1" name="disciplina" value="<?php echo ($usuario_atividade->disciplina); ?>" class="form-control" />
+								</div>
+							</div>
+							<?php
+							/*if (
+									 		($_SESSION['vinculo'] == 1) ||
+											($_SESSION['vinculo'] == 4) ||
+											($_SESSION['vinculo'] == 5) ){
+											*/ ?>
+
+							<!-- <div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Atividades: </label>
+
+								<div class="col-sm-9">
+									<DIV class="col-xs-10 col-sm-8">
+										<ul>
+											<?php foreach ($atividades_projeto as $atividade_projeto) { ?>
+												<li style="list-style:circle"><?php echo ($atividade_projeto['descricao']); ?></li>
+											<?php } ?>
+										</ul>
+									</DIV>
+								</div>
+							</div> -->
+							<?php // } 
+							?>
+
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Descrição das atividades desenvolvidas: </label>
+								<div class="col-sm-9">
+
+
+									<textarea id="texto" name="texto" class="form-control col-md-7 col-xs-12" required="required"><?php echo $usuario_atividade->texto; ?></textarea>
+									<script type="text/javascript">
+										var editor = CKEDITOR.replace('texto', {
+											height: 200
+										});
+									</script>
+
+
+								</div>
+							</div>
+
+							<script type="text/javascript">
+								function mascaraData(campoData) {
+									var data = campoData.value;
+									if (data.length == 2) {
+										data = data + '/';
+										document.forms[0].data_inicial.value = data;
+										return true;
+									}
+									if (data.length == 5) {
+										data = data + '/';
+										document.forms[0].data_inicial.value = data;
+										return true;
+									}
+								}
+
+								function mascaraData1(campoData) {
+									var data = campoData.value;
+									if (data.length == 2) {
+										data = data + '/';
+										document.forms[0].data_final.value = data;
+										return true;
+									}
+									if (data.length == 5) {
+										data = data + '/';
+										document.forms[0].data_final.value = data;
+										return true;
+									}
+								}
+
+								function mascaraData3(campoData) {
+									var data = campoData.value;
+									if (data.length == 2) {
+										data = data + '/';
+										document.forms[0].data_abrang_ini.value = data;
+										return true;
+									}
+									if (data.length == 5) {
+										data = data + '/';
+										document.forms[0].data_abrang_ini.value = data;
+										return true;
+									}
+								}
+
+								function mascaraData4(campoData) {
+									var data = campoData.value;
+									if (data.length == 2) {
+										data = data + '/';
+										document.forms[0].data_abrang_fim.value = data;
+										return true;
+									}
+									if (data.length == 5) {
+										data = data + '/';
+										document.forms[0].data_abrang_fim.value = data;
+										return true;
+									}
+								}
+
+								function mascaraData6(campoData) {
+									var data = campoData.value;
+									if (data.length == 2) {
+										data = data + '/';
+										document.forms[0].data_relatorio.value = data;
+										return true;
+									}
+									if (data.length == 5) {
+										data = data + '/';
+										document.forms[0].data_relatorio.value = data;
+										return true;
+									}
+								}
+							</script>
+
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Data inicial</label>
+								<div class="col-sm-9">
+									<input type="text" OnKeyUp="mascaraData(this);" id="form-field-1" maxlength="10" name="data_inicial" value="<?php echo date('d/m/Y',  strtotime($usuario_atividade->data_inicial)); ?>" class="col-xs-10 col-sm-5" required />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Data final</label>
+								<div class="col-sm-9">
+									<input type="text" OnKeyUp="mascaraData1(this);" id="form-field-1" maxlength="10" name="data_final" value="<?php echo date('d/m/Y',  strtotime($usuario_atividade->data_final)); ?>" class="col-xs-10 col-sm-5" required />
+								</div>
+							</div>
+							<?php
+							/*
+									  if (
+										 		($_SESSION['vinculo'] == 1) ||
+												($_SESSION['vinculo'] == 2) ||
+												($_SESSION['vinculo'] == 3) 
+									  			){ 
+									  	*/
+							?>
+							<!--div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1">&nbsp;</label>
+										<div class="col-sm-9">
+										<hr />
+										</div>
+									</div>
+									
+									<!--div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1">&nbsp;</label>
+										<div class="col-sm-9">
+											Digite o período de abrang&ecirc;ncia do relatório:
+										</div>
+									</div>									
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Inicial</label>
+										<div class="col-sm-9">
+											<input type="text" OnKeyUp="mascaraData3(this);" id="form-field-1"  maxlength="10" name="data_abrang_ini" value="<?php echo date('d/m/Y',  strtotime($usuario_atividade->data_abrang_ini)); ?>" class="col-xs-10 col-sm-5" required />
+										</div>
+									</div>									
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Final</label>
+										<div class="col-sm-9">
+											<input type="text" OnKeyUp="mascaraData4(this);" id="form-field-1"  maxlength="10" name="data_abrang_fim" value="<?php echo date('d/m/Y',  strtotime($usuario_atividade->data_abrang_fim)); ?>" class="col-xs-10 col-sm-5"  onsubmit="return aviso(data_abrang_fim)" />
+										</div>
+									</div-->
+
+							<?php //} 
+							?>
+
+							<br>
+							<br>
+
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right" for="form-field-1">&nbsp;</label>
+								<div class="col-sm-9">
+									Data para ser impressa no relat&oacute;rio:
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Data</label>
+								<div class="col-sm-9">
+									<input type="text" OnKeyUp="mascaraData6(this);" id="form-field-1" maxlength="10" name="data_relatorio" value="<?php echo date('d/m/Y',  strtotime($usuario_atividade->data_relatorio)); ?>" class="col-xs-10 col-sm-5" required />
+								</div>
+							</div>
+
+							<div class="clearfix form-actions">
+								<div class="col-md-offset-3 col-md-9">
+									<button class="btn btn-info" type="submit">
+										<i class="ace-icon fa fa-check bigger-110"></i>
+										Salvar
+									</button>
+								</div>
+							</div>
+						</form>
+					</div><!-- /.col -->
+				</div><!-- /.row -->
+			</div><!-- /.page-content -->
+			</div>
+			</div><!-- /.main-content -->

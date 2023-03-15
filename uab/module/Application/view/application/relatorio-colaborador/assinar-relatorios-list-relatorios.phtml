@@ -1,0 +1,89 @@
+<!-- /section:basics/sidebar -->
+<div class="main-content">
+	<div class="main-content-inner">
+		<!-- #section:basics/content.breadcrumbs -->
+		<div class="breadcrumbs" id="breadcrumbs">
+			<script type="text/javascript">
+				try {
+					ace.settings.check('breadcrumbs', 'fixed')
+				} catch (e) {}
+			</script>
+			<ul class="breadcrumb">
+				<li>
+					<i class="ace-icon fa fa-home home-icon"></i>
+					<a href="<?php echo $this->url('home', array('action' => 'index')); ?>">Home</a>
+				</li>
+
+				<li class="active">Editar relat&oacute;rios</li>
+			</ul><!-- /.breadcrumb -->
+		</div>
+
+		<!-- /section:basics/content.breadcrumbs -->
+		<div class="page-content">
+
+			<!-- /section:settings.box -->
+			<div class="page-header">
+				<h1>
+					Editar relat&oacute;rios
+				</h1>
+			</div><!-- /.page-header -->
+
+			<div class="row">
+				<div class="col-xs-12">
+					<!-- PAGE CONTENT BEGINS -->
+					<div class="row">
+						<div class="col-xs-12">
+
+							<table id="simple-table" class="table table-striped table-bordered table-hover">
+								<thead>
+									<tr>
+										<th width="80%">Mês de referência:</th>
+										<th>Opções</th>
+
+									</tr>
+								</thead>
+
+								<tbody>
+									<?php
+									$meses = array(1 => "Janeiro", 2 => "Fevereiro", 3 => "Março", 4 => "Abril", 5 => "Maio", 6 => "Junho", 7 => "Julho", 8 => "Agosto", 9 => "Setembro", 10 => "Outubro", 11 => "Novembro", 12 => "Dezembro");
+									?>
+									<?php foreach ($usuario_atividades_meses as $usuario_atividade) {
+									?>
+										<tr>
+
+											<td><?= $usuario_atividade['id']; ?> -
+												<?php echo $meses[(int)$usuario_atividade['mes']]; ?> / <?php echo $usuario_atividade['ano']; ?>
+											</td>
+
+											<td>
+												<? if ($usuario_atividade['assinatura_colaborador'] == '') { ?>
+														Aguardando assinatura do colaborador
+												<? } else { ?>
+													<? if ($usuario_atividade['assinatura_representante'] == '') { ?>
+														<div class=" btn-group">
+															<a href="<?php echo $this->url('relatorio-colaborador/assinar-relatorio-coordenador', array('action' => 'assinar-relatorio-coordenador', 'id' => $usuario_atividade['id'])); ?>" class="btn btn-xs btn-alert">
+																Assinar relatório
+															</a>
+														</div>
+
+													<? } else { ?>
+
+														Documento assinado
+
+													<? } ?>
+
+												<? } ?>
+
+
+											</td>
+										</tr>
+									<?php } ?>
+								</tbody>
+							</table>
+						</div><!-- /col -->
+					</div><!-- /.row -->
+				</div><!-- PAGE CONTENT ENDS -->
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+	</div><!-- /.page-content -->
+</div>

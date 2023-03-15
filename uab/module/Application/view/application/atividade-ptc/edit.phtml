@@ -1,0 +1,319 @@
+			<!-- /section:basics/sidebar -->
+			<div class="main-content">            
+           				<div class="main-content-inner">                       
+					<!-- #section:basics/content.breadcrumbs -->
+					<div class="breadcrumbs" id="breadcrumbs">
+						<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+
+						<ul class="breadcrumb">
+							<li>
+								<i class="ace-icon fa fa-home home-icon"></i>
+								<a href="<?php echo $this->url('home', array('action'=>'index')); ?>">Home</a>
+							</li>
+
+							<li class="active">Editar Atividade</li>
+						</ul><!-- /.breadcrumb -->
+
+
+						<!-- /section:basics/content.searchbox -->
+					</div>
+
+					<!-- /section:basics/content.breadcrumbs -->
+					<div class="page-content">
+					
+						<div class="page-header">
+							<h3>
+								Editar Atividade
+								<!--small>
+									<i class="ace-icon fa fa-angle-double-right"></i>
+									Common form elements and layouts
+								</small-->
+							</h3>
+						</div><!-- /.page-header -->
+
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+								<form id="atividade_ptc_edit" name="atividade_ptc_edit" enctype="multipart/form-data" method="post" action="<?php echo $this->url('atividade-ptc/edit', array('action' => 'edit', 'id'=> $id)); ?>" role="form" class="form-horizontal form-label-left">
+              						<!-- #section:elements.form -->
+                                                                                                            
+										<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.js"></script>								         
+									    <script type="text/javascript">
+										$(document).ready(function() {
+									        $('#estado').change(function() {
+										        var area_id = $('#estado').val();								            
+									    		//var ajax_url = "/uab/projetos/atividade-ptc/get-submetas/"+area_id;    
+									    		var ajax_url = "/uab/projetos/atividade-ptc/get-submetas/"+area_id;
+									    		
+									    		 $.ajax({
+									 	            type: "POST",
+									 	            url: ajax_url,
+									 	            data: "area="+area_id,
+									 	            success: function(msg){ 
+									 	                $("#submeta_id").html(msg);
+									 	        	}
+									 	     	});     	   
+									        });
+										});
+									   
+									    </script> 
+                                    
+	                                    <div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Área/Submeta: </label>
+	
+											<div class="col-sm-9">                                        
+												<input type="text" id="form-field-1" disabled="disabled" class="col-xs-10 col-sm-9"  rows="3" style="width:100%" value="<?php echo ($areas[$atividade_ptc->area_id]); ?> / <?php echo ($submetas[$atividade_ptc->submeta_id]['codigo']); ?>" />
+											</div>
+										</div>
+                                    
+										<script type="text/javascript">
+										function exibe(id) {
+											if(document.getElementById(id).style.display=="none") {
+												document.getElementById(id).style.display = "inline";
+											}
+											else {
+												document.getElementById(id).style.display = "none";
+											}
+										}
+										</script>
+										<div class="form-group" >
+											<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">&nbsp;</label>
+
+										<?php //if ($_SESSION['permissao']==3){ ?>
+											<div class="col-sm-9">
+												<a href="#" onclick="javascript: exibe('conteudo');">Clique para alterar</a>
+											</div>
+										<?php //} ?>
+										</div>
+
+										<div class="form-group" id="conteudo" style="display: none;">   
+											<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Área</label>
+												<div class="col-sm-9">
+		                                            <select  class="form-control"  name="area_id" id="estado">
+		                                            <option></option>
+		                                            <?php foreach ($areas as $area_id => $area_descricao){ ?>
+		                                            <option value="<?php echo $area_id; ?>"><?php echo ($area_descricao); ?></option>
+		                                            <?php } ?>	  
+		                                            </select>
+												</div>
+											<br /><br /><br />
+	
+	                                		<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Submeta</label>
+			                                <div class="col-sm-9">                                
+			                                	<div id="nucleo"></div>
+                                				<select  class="form-control"  name="submeta_id" id="submeta_id"></select>       
+			                                </div>
+	                                	</div>
+                                    <hr />                                    
+                                            <script language="JavaScript" type="text/javascript">
+											   function mascaraData(campoData){
+											              var data = campoData.value;
+											              if (data.length == 2){
+											                  data = data + '/';
+											                  document.forms[0].data_inicio.value = data;
+											      return true;              
+											              }
+											              if (data.length == 5){
+											                  data = data + '/';
+											                  document.forms[0].data_inicio.value = data;
+											                  return true;
+											              }
+											         }
+											
+											   function mascaraData1(campoData){
+											              var data = campoData.value;
+											              if (data.length == 2){
+											                  data = data + '/';
+											                  document.forms[0].data_fim.value = data;
+											      return true;              
+											              }
+											              if (data.length == 5){
+											                  data = data + '/';
+											                  document.forms[0].data_fim.value = data;
+											                  return true;
+											              }
+											         }
+													 
+													 function mascaraData3(campoData){
+											              var data = campoData.value;
+											              if (data.length == 2){
+											                  data = data + '/';
+											                  document.forms[0].inicio.value = data;
+											      return true;              
+											              }
+											              if (data.length == 5){
+											                  data = data + '/';
+											                  document.forms[0].inicio.value = data;
+											                  return true;
+											              }
+											         }
+													 
+													 
+													 function mascaraData4(campoData){
+											              var data = campoData.value;
+											              if (data.length == 2){
+											                  data = data + '/';
+											                  document.forms[0].fim.value = data;
+											      return true;              
+											              }
+											              if (data.length == 5){
+											                  data = data + '/';
+											                  document.forms[0].fim.value = data;
+											                  return true;
+											              }
+											         }
+											
+											</script>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Etapa</label>
+
+										<div class="col-sm-9">
+											<input type="text" <?php if ($_SESSION['permissao'] != 8){ ?> disabled="disabled" <?php } ?>  id="form-field-1" name="etapa" class="col-xs-10 col-sm-5"  value="<?php echo ($atividade_ptc->etapa); ?>" />
+										</div>
+									</div>
+                                    
+                                    <div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Atividade</label>
+
+										<div class="col-sm-9">
+										<textarea <?php if ($_SESSION['permissao'] != 8){ ?> disabled="disabled" <?php } ?> id="form-field-1" name="atividade" rows="7" style="width:100%"   class="col-xs-10 col-sm-5" ><?php echo ($atividade_ptc->atividade); ?> </textarea>
+										</div>
+									</div>                                    
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Previs&atilde;o Inicio </label>
+
+										<div class="col-sm-9">
+											<input <?php if ($_SESSION['permissao'] != 8){ ?> disabled="disabled" <?php } ?> type="text" id="form-field-1" OnKeyUp="mascaraData3(this);" maxlength="10" name="inicio" class="col-xs-10 col-sm-5"  value="<?php if ($atividade_ptc->inicio != "0000-00-00"){ echo date('d/m/Y', strtotime($atividade_ptc->inicio)); } ?>" />
+										</div>
+									</div>
+									                                    
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Previs&atilde;o Fim</label>
+
+										<div class="col-sm-9">
+											<input <?php if ($_SESSION['permissao'] != 8){ ?> disabled="disabled" <?php } ?> value="<?php if ($atividade_ptc->fim != "0000-00-00"){ echo date('d/m/Y', strtotime($atividade_ptc->fim)); } ?>" type="text" id="form-field-1" OnKeyUp="mascaraData4(this);" name="fim" class="col-xs-10 col-sm-5"  />
+										</div>
+									</div>
+                                    
+                                    <div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Indicador Físico - <small>Unid</small></label>
+
+										<div class="col-sm-9">
+											<input <?php if ($_SESSION['permissao'] != 8){ ?> disabled="disabled" <?php } ?>  type="text" id="form-field-1" name="indicador_unid" class="col-xs-10 col-sm-5"  value="<?php echo ($atividade_ptc->indicador_unid);?>" />
+										</div>
+									</div>
+                                   
+                                     <div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Indicador Físico - <small>Quant</small></label>
+
+										<div class="col-sm-9">
+											<input <?php if ($_SESSION['permissao'] != 8){ ?> disabled="disabled" <?php } ?>  type="text" id="form-field-1" name="indicador_quant" class="col-xs-10 col-sm-5" value="<?php echo ($atividade_ptc->indicador_quant);?>"  />
+										</div>
+									</div>
+                                    
+                                      <div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Indicador de desempenho</label>
+
+										<div class="col-sm-9">
+											<textarea <?php if ($_SESSION['permissao'] != 8){ ?> disabled="disabled" <?php } ?>   id="form-field-1" name="indicador_desempenho" rows="7" style="width:100%" class="col-xs-10 col-sm-5" ><?php echo ($atividade_ptc->indicador_desempenho);?></textarea>
+										</div>
+									</div>
+                                    
+                                    <hr />
+                                    
+                                    <div class="form-group">
+												<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Fluxo continuo?</label>
+
+												<div class="radio">
+													<label>
+														<input <?php if ($atividade_ptc->fluxo_continuo == '1'){ ?> checked="checked" <?php } ?>  type="radio" name="fluxo_continuo" value="1" class="ace" />
+														<span class="lbl"> Sim</span>
+													</label>
+												&nbsp;&nbsp;
+													<label>
+														<input <?php if ($atividade_ptc->fluxo_continuo == '0' || $atividade_ptc->fluxo_continuo == ""){ ?> checked="checked" <?php } ?>   type="radio" name="fluxo_continuo" value="0" class="ace" />
+														<span class="lbl"> Não</span>
+													</label>
+												</div>
+                                          </div>                                    
+                                    
+                                    <div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Início da execução</label>
+
+										<div class="col-sm-9">
+											<input value="<?php if ($atividade_ptc->data_inicio != "0000-00-00"){ echo date('d/m/Y', strtotime($atividade_ptc->data_inicio)); } ?>" type="text" id="form-field-1" OnKeyUp="mascaraData(this);" maxlength="10" name="data_inicio" class="col-xs-10 col-sm-5"  />
+										</div>
+									</div>
+                                                                        
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Fim da execução</label>
+
+										<div class="col-sm-9">
+											<input value="<?php if ($atividade_ptc->data_fim != "0000-00-00"){ echo date('d/m/Y', strtotime($atividade_ptc->data_fim)); } ?>" type="text" id="form-field-1" OnKeyUp="mascaraData1(this);" name="data_fim" class="col-xs-10 col-sm-5"  />
+										</div>
+									</div>
+                                    
+                                    
+                                     <div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Resultados</label>
+
+										<div class="col-sm-9">
+											<textarea id="form-field-1" name="resultados" rows="7" style="width:100%" class="col-xs-10 col-sm-5"  /><?=$atividade_ptc->resultados;?></textarea>
+										</div>
+									</div>
+                                    
+                                    
+                                    <div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Produtos</label>
+										<div class="col-sm-9">
+											<textarea id="form-field-1" name="produtos" rows="7" style="width:100%" class="col-xs-10 col-sm-5"  /><?=$atividade_ptc->produtos;?></textarea>
+										</div>
+									</div>
+                                    
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Status</label>
+
+										<div class="radio">
+											<label>
+												<input <?php if ($atividade_ptc->status=='1'){ ?> checked="checked" <?php } ?>  type="radio" name="status" value="1" class="ace" />
+												<span class="lbl"> Conclu&iacute;do</span>
+											</label>
+										&nbsp;&nbsp;
+											<label>
+												<input <?php if ($atividade_ptc->status=='2'){ ?> checked="checked" <?php } ?>  type="radio" name="status" value="2" class="ace" />
+												<span class="lbl"> N&atilde;o conclu&iacute;do</span>
+											</label>
+										&nbsp;&nbsp;
+											<label>
+												<input <?php if ($atividade_ptc->status=='3'){ ?> checked="checked" <?php } ?>  type="radio" name="status" value="3" class="ace" />
+												<span class="lbl"> Parcialmente conclu&iacute;do</span>
+											</label>
+										&nbsp;&nbsp;
+											<label>
+												<input <?php if ($atividade_ptc->status=='4'){ ?> checked="checked" <?php } ?> type="radio" name="status" value="4" class="ace" />
+												<span class="lbl"> N&atilde;o iniciada</span>
+											</label>
+										&nbsp;&nbsp;
+
+										</div>
+                                    </div>
+
+									<div class="clearfix form-actions">
+										<div class="col-md-offset-3 col-md-9">
+											<button class="btn btn-info" type="submit">
+												<i class="ace-icon fa fa-check bigger-110"></i>
+												Salvar
+											</button>
+										</div>
+									</div>									
+                        		</form>
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+					</div>
+</div>
+
