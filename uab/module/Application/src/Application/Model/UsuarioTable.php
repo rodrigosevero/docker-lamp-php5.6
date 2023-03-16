@@ -23,13 +23,12 @@ class UsuarioTable
 	{
 		$sql = 'select a.*, d.nome as representante, e.descricao as permissao,
 	 	 		(select count(up.id) from usuario_projeto up left join projeto p on p.id = up.projeto_id  where up.del = 0 and  p.inativo = 0 and  up.usuario_id = a.id) as projetos,
-				(select concat(nome, " - ", id) from usuario where id = a.representante_id ) as representante 
+				(select nome from usuario where id = a.representante_id ) as representante 
      		from usuario a 
 			  left join area b on b.id=a.area_id 
 			  left join tipo_vinculo c on c.id = a.vinculo
 			  left join permissao e on e.id = a.permissao
 			  left join representante_tce d on d.id = a.representante_id
-
 		  where a.del = 0 order by nome ASC';
 
 		$statement = $this->tableGateway->adapter->query($sql);
@@ -40,17 +39,17 @@ class UsuarioTable
 	public function getUsuariosColaboradoresPorRepresentante($representante_id)
 	{
 		// $sql = 'select a.*, d.nome as representante, e.descricao as permissao,
-	 	//  		(select count(up.id) from usuario_projeto up left join projeto p on p.id = up.projeto_id  where up.del = 0 and  p.inativo = 0 and  up.usuario_id = a.id) as projetos,
+		//  		(select count(up.id) from usuario_projeto up left join projeto p on p.id = up.projeto_id  where up.del = 0 and  p.inativo = 0 and  up.usuario_id = a.id) as projetos,
 		// 		(select nome from usuario where id = a.representante_id ) as representante 
-     	// 	from usuario a 
+		// 	from usuario a 
 		// 	  left join area b on b.id=a.area_id 
 		// 	  left join tipo_vinculo c on c.id = a.vinculo
 		// 	  left join permissao e on e.id = a.permissao
 		// 	  left join representante_tce d on d.id = a.representante_id
 		//   where a.del = 0 and a.representante_id =  ' . $representante_id . ' order by nome ASC ';
-//  $representante_id;
+		//  $representante_id;
 
-		  $sql = 'select a.* from usuario a where a.del = 0 and representante_id = '.$representante_id.' order by nome asc';
+		$sql = 'select a.* from usuario a where a.del = 0 and representante_id = ' . $representante_id . ' order by nome asc';
 		//   echo $sql; die;
 
 		$statement = $this->tableGateway->adapter->query($sql);
