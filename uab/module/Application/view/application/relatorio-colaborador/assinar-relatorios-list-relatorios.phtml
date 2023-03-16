@@ -51,7 +51,7 @@
 									?>
 										<tr>
 
-											<td><?= $usuario_atividade['id']; ?> -
+											<td> <?php echo $usuario_atividade['id']; ?> - 
 												<?php echo $meses[(int)$usuario_atividade['mes']]; ?> / <?php echo $usuario_atividade['ano']; ?>
 											</td>
 
@@ -68,7 +68,13 @@
 
 													<? } else { ?>
 
-														Documento assinado
+														Documento assinado 
+														<div class=" btn-group">
+															<a href="<?php echo $this->url('relatorio-colaborador/assinar-relatorio-coordenador', array('action' => 'assinar-relatorio-coordenador', 'id' => $usuario_atividade['id'])); ?>" class="btn btn-xs btn-primary">
+																Visualizar
+															</a>
+														</div>
+														
 
 													<? } ?>
 

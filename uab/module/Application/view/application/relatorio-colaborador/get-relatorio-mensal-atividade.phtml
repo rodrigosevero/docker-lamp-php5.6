@@ -170,9 +170,9 @@ error_reporting(E_ALL);
                 <p>
               <table>
                <tr>
-                <td align="center">
+                <td align="">
                     <br><br><? if ($usuario_atividade['assinatura_colaborador'] != ''){ ?>                       
-                        Assinado eletronicamente em <?php echo date('d/m/Y H:i:s', strtotime($usuario_atividade['data_assinatura_colaborador'])); ?>
+                        Assinado eletrônicamente em <?php echo date('d/m/Y H:i:s', strtotime($usuario_atividade['data_assinatura_colaborador'])); ?>
                         <br><?=$usuario_atividade['assinatura_colaborador'];?>
                         <br>
                         <? } ?>
@@ -190,7 +190,11 @@ error_reporting(E_ALL);
                    </td>
                    <td>
                        <br><br>
-                       
+                       <? if ($usuario_atividade['assinatura_representante'] != ''){ ?>                       
+                        Assinado eletrônicamente em <?php echo date('d/m/Y H:i:s', strtotime($usuario_atividade['data_assinatura_representante'])); ?>
+                        <br><?=$usuario_atividade['assinatura_representante'];?>
+                        <br>
+                        <? } ?>
                    ____________________________________
 			</td></tr>
                
