@@ -15,7 +15,7 @@ services:
       - "./php/home/.git-completion.bash:/root/.git-completion.bash"
       - "./php/home/.git-prompt.sh:/root/.git-prompt.sh"
       - "./php/home/.vimrc:/root/.vimrc"
-      - "./uab:/var/www/html"
+      - "./htdocs:/var/www/html"
     ports:
       - "8080:80"
   db:
